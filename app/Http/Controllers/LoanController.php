@@ -8,16 +8,16 @@ class LoanController extends Controller
 {
     public function index()
     {
-        return view('loans.index');
+        return view('Loan.index');
     }
 
     public function create()
     {
-        return view('loans.create');
+        return view('Loan.create');
     }
 
     public function edit($id)
     {
-        return view('loans.edit', compact('loan'));
+        return view('Loans.edit');
     }
 }
