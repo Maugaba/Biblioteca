@@ -164,17 +164,6 @@
 																</select>
 															</div>
 														</div>
-														<div class="col-md-4 my-2 my-md-0">
-															<div class="d-flex align-items-center">
-																<label class="mr-3 mb-0 d-none d-md-block">Type:</label>
-																<select class="form-control" id="kt_datatable_search_type">
-																	<option value="">All</option>
-																	<option value="1">Online</option>
-																	<option value="2">Retail</option>
-																	<option value="3">Direct</option>
-																</select>
-															</div>
-														</div>
 													</div>
 												</div>
 												<div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
@@ -239,7 +228,8 @@ var KTDefaultDatatableDemo = function() {
                 type: 'remote',
                 source: {
                     read: {
-                        url: "{{ route('users') }}", // Ruta de tu controlador que devuelve los datos de los usuarios
+                        url: "{{ route('users.getAll') }}",
+						method: 'GET' // Ruta de tu controlador que devuelve los datos de los usuarios
                     },
                 },
                 pageSize: 20, // display 20 records per page
@@ -282,11 +272,10 @@ var KTDefaultDatatableDemo = function() {
                 // Aquí debes definir las columnas con los nombres de los campos de tu base de datos
                 // Por ejemplo:
                 { field: 'id', title: 'ID' },
-                { field: 'username', title: 'Username' },
-                { field: 'password', title: 'Password' },
+                { field: 'username', title: 'Nombre de Usuario' },
                 { field: 'estado', title: 'Estado' },
-                { field: 'created_at', title: 'Created At' },
-                { field: 'updated_at', title: 'Updated At' }
+                { field: 'created_at', title: 'Creacion' },
+                { field: 'updated_at', title: 'Actualizado' }
             ],
 
         };

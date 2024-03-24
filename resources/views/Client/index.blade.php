@@ -240,6 +240,7 @@ var KTDefaultDatatableDemo = function() {
                 source: {
                     read: {
                         url: "{{ route('clients.getAll') }}",
+                        method: 'GET'
 
                     },
                 },

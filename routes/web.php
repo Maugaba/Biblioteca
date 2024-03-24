@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', 'App\Http\Controllers\UserController@index')->name('users');
+        Route::get('/all', 'App\Http\Controllers\UserController@getAll')->name('users.getAll');
         Route::get('/changepassword/{id}', 'App\Http\Controllers\UserController@changepassword')->name('users.changepassword');
         Route::get('/change/{id}', 'App\Http\Controllers\UserController@change')->name('users.change');
     });
