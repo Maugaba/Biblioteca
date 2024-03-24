@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', 'App\Http\Controllers\LoanController@edit')->name('loans.edit');
         Route::post('/update/{id}', 'App\Http\Controllers\LoanController@update')->name('loans.update');
         Route::get('/change/{id}', 'App\Http\Controllers\LoanController@change')->name('loans.change');
+        Route::post('/list/json', 'App\Http\Controllers\LoanController@listjson')->name('loanslistjson');
     });
 });
 

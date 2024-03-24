@@ -18,7 +18,7 @@ class Prestamos extends Migration
             $table->integer('libroId')->foreign('libroId')->references('id')->on('libros');
             $table->integer('clienteId')->foreign('clienteId')->references('id')->on('clientes');
             $table->date('fechaDePrestamo');
-            $table->date('fechaDeDevolucion');
+            $table->date('fechaDeDevolucion')->nullable();
             $table->boolean('devuelto')->default(false);
             $table->enum('estado', ['activo', 'inactivo'])->default('activo');
             $table->timestamps();
