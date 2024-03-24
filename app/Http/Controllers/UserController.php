@@ -7,6 +7,6 @@ class UserController extends Controller
 {
     public function index(request $request)
     {
-        return view('user');
+        return view('User.index');
     }
 }
