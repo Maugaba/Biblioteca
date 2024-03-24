@@ -15,7 +15,26 @@ class LoanController extends Controller
 
     public function create()
     {
-        return view('Loan.create');
+        $Books = Libros::all()->where('estado', 'disponible');
+        $Clients = Cliente::all();
+
+        $BooksArray = [];
+        $ClientsArray = [];
+        foreach ($Books as $Book) {
+            $model = [
+                "id" => $Book->id,
+                "name" => $Book->nombreDelLibro . " / " . $Book->autoresOEditorial,
+            ];
+            array_push($BooksArray, $model);
+        }
+        foreach ($Clients as $Client) {
+            $model = [
+                "id" => $Client->id,
+                "name" => $Client->nombreCompleto,
+            ];
+            array_push($ClientsArray, $model);
+        }
+        return view('Loan.create', compact('BooksArray', 'ClientsArray'));
     }
 
     public function edit($id)

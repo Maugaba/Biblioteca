@@ -80,7 +80,7 @@
         <div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
             <form>
                 <!--begin::Header-->
-                <div class="d-flex flex-column pt-12 bgi-size-cover bgi-no-repeat rounded-top" style="background-image: url(assets/media/misc/bg-1.jpg)">
+                <div class="d-flex flex-column pt-12 bgi-size-cover bgi-no-repeat rounded-top" style="background-image: url({{url('assets/media/misc/bg-1.jpg')}})">
                     <!--begin::Title-->
                     <h4 class="d-flex flex-center rounded-top">
                         <span class="text-white">User Notifications</span>
@@ -538,7 +538,7 @@
         <!--begin::Dropdown-->
         <div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
             <!--begin:Header-->
-            <div class="d-flex flex-column flex-center py-10 bgi-size-cover bgi-no-repeat rounded-top" style="background-image: url(assets/media/misc/bg-1.jpg)">
+            <div class="d-flex flex-column flex-center py-10 bgi-size-cover bgi-no-repeat rounded-top" style="background-image: url({{url('assets/media/misc/bg-1.jpg')}})">
                 <h4 class="text-white font-weight-bold">Quick Actions</h4>
                 <span class="btn btn-success btn-sm font-weight-bold font-size-sm mt-2">23 tasks pending</span>
             </div>
@@ -650,7 +650,7 @@
         <div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-xl dropdown-menu-anim-up">
             <form>
                 <!--begin::Header-->
-                <div class="d-flex align-items-center py-10 px-8 bgi-size-cover bgi-no-repeat rounded-top" style="background-image: url(assets/media/misc/bg-1.jpg)">
+                <div class="d-flex align-items-center py-10 px-8 bgi-size-cover bgi-no-repeat rounded-top" style="background-image: url({{url('assets/media/misc/bg-1.jpg')}})">
                     <span class="btn btn-md btn-icon bg-white-o-15 mr-4">
                         <i class="flaticon2-shopping-cart-1 text-success"></i>
                     </span>
@@ -678,7 +678,7 @@
                             </div>
                         </div>
                         <a href="#" class="symbol symbol-70 flex-shrink-0">
-                            <img src="assets/media/stock-600x400/img-1.jpg" title="" alt="" />
+                            <img src="{{asset('assets/media/stock-600x400/img-1.jpg')}}" title="" alt="" />
                         </a>
                     </div>
                     <!--end::Item-->
@@ -703,7 +703,7 @@
                             </div>
                         </div>
                         <a href="#" class="symbol symbol-70 flex-shrink-0">
-                            <img src="assets/media/stock-600x400/img-2.jpg" title="" alt="" />
+                            <img src="{{asset('assets/media/stock-600x400/img-2.jpg')}}" title="" alt="" />
                         </a>
                     </div>
                     <!--end::Item-->
@@ -728,7 +728,7 @@
                             </div>
                         </div>
                         <a href="#" class="symbol symbol-70 flex-shrink-0">
-                            <img src="assets/media/stock-600x400/img-3.jpg" title="" alt="" />
+                            <img src="{{asset('assets/media/stock-600x400/img-3.jpg')}}" title="" alt="" />
                         </a>
                     </div>
                     <!--end::Item-->
@@ -753,7 +753,7 @@
                             </div>
                         </div>
                         <a href="#" class="symbol symbol-70 flex-shrink-0">
-                            <img src="assets/media/stock-600x400/img-4.jpg" title="" alt="" />
+                            <img src="{{asset('assets/media/stock-600x400/img-4.jpg')}}" title="" alt="" />
                         </a>
                     </div>
                     <!--end::Item-->
@@ -796,75 +796,6 @@
         </div>
     </div>
     <!--end::Quick panel-->
-    <!--begin::Languages-->
-    <div class="dropdown">
-        <!--begin::Toggle-->
-        <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
-            <div class="btn btn-icon btn-hover-transparent-white btn-dropdown btn-lg mr-1">
-                <img class="h-20px w-20px rounded-sm" src="assets/media/svg/flags/226-united-states.svg" alt="" />
-            </div>
-        </div>
-        <!--end::Toggle-->
-        <!--begin::Dropdown-->
-        <div class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
-            <!--begin::Nav-->
-            <ul class="navi navi-hover py-4">
-                <!--begin::Item-->
-                <li class="navi-item">
-                    <a href="#" class="navi-link">
-                        <span class="symbol symbol-20 mr-3">
-                            <img src="assets/media/svg/flags/226-united-states.svg" alt="" />
-                        </span>
-                        <span class="navi-text">English</span>
-                    </a>
-                </li>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <li class="navi-item active">
-                    <a href="#" class="navi-link">
-                        <span class="symbol symbol-20 mr-3">
-                            <img src="assets/media/svg/flags/128-spain.svg" alt="" />
-                        </span>
-                        <span class="navi-text">Spanish</span>
-                    </a>
-                </li>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <li class="navi-item">
-                    <a href="#" class="navi-link">
-                        <span class="symbol symbol-20 mr-3">
-                            <img src="assets/media/svg/flags/162-germany.svg" alt="" />
-                        </span>
-                        <span class="navi-text">German</span>
-                    </a>
-                </li>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <li class="navi-item">
-                    <a href="#" class="navi-link">
-                        <span class="symbol symbol-20 mr-3">
-                            <img src="assets/media/svg/flags/063-japan.svg" alt="" />
-                        </span>
-                        <span class="navi-text">Japanese</span>
-                    </a>
-                </li>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <li class="navi-item">
-                    <a href="#" class="navi-link">
-                        <span class="symbol symbol-20 mr-3">
-                            <img src="assets/media/svg/flags/195-france.svg" alt="" />
-                        </span>
-                        <span class="navi-text">French</span>
-                    </a>
-                </li>
-                <!--end::Item-->
-            </ul>
-            <!--end::Nav-->
-        </div>
-        <!--end::Dropdown-->
-    </div>
-    <!--end::Languages-->
     <!--begin::User-->
     <div class="dropdown">
         <!--begin::Toggle-->

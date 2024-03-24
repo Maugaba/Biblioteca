@@ -53,7 +53,7 @@
                             </div>
                             <!--end::Dropdown-->
                             <!--begin::Button-->
-                            <a href="#" class="btn btn-primary font-weight-bolder"><i class="fas fa-book-reader"></i>Nuevo Prestamo</a>
+                            <a href="{{url('/loan/create')}}" class="btn btn-primary font-weight-bolder"><i class="fas fa-book-reader"></i>Nuevo Prestamo</a>
                             <!--end::Button-->
                         </div>
                     </div>
@@ -124,7 +124,6 @@
                     return "No hay resultados encontrados";
                 }
             },
-            tags: true
         });
     });
     var datatable = $("#kt_datatable").DataTable({
@@ -167,10 +166,10 @@
                 data: 'Actions',
                 render: function(data, type, full, meta) {
                     return '\
-                    <a href="#" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">\
+                    <a href="#" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar prestamo">\
                         <i class="fas fa-edit"></i>\
                     </a>\
-                    <a href="#" class="btn btn-sm btn-clean btn-icon" title="Delete">\
+                    <a href="#" class="btn btn-sm btn-clean btn-icon" title="Cambiar estado del prestamo">\
                         <i class="fas fa-trash"></i>\
                     </a>\
                     ';
