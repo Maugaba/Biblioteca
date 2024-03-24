@@ -1,18 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 
 class ClientController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::all();
-        return view('clients.index', compact('clientes'));
+        return view('Client.index');
     }
 
+
+    public function getAll() {
+        $clientes = Cliente::all();
+        return $clientes;
+    }
+    
     public function create()
     {
         return view('clients.create');

@@ -13,6 +13,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'client'], function () {
         Route::get('/', 'App\Http\Controllers\ClientController@index')->name('clients');
+        Route::get('/clients/all', 'App\Http\Controllers\ClientController@getAll')->name('clients.getAll');
         Route::get('/create', 'App\Http\Controllers\ClientController@create')->name('clients.create');
         Route::post('/store', 'App\Http\Controllers\ClientController@store')->name('clients.store');
         Route::get('/edit/{id}', 'App\Http\Controllers\ClientController@edit')->name('clients.edit');
