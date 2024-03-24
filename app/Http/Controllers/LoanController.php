@@ -18,6 +18,6 @@ class LoanController extends Controller
 
     public function edit($id)
     {
-        return view('Loans.edit');
+        return view('Loan.edit');
     }
 }
