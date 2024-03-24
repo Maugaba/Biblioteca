@@ -37,6 +37,7 @@ div.dataTables_wrapper div.dataTables_length select {
 
 div.dataTables_wrapper div.dataTables_filter {
   text-align: right;
+  display: none;
 }
 
 div.dataTables_wrapper div.dataTables_filter label {

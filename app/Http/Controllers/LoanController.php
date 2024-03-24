@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Libros;
 use App\Models\Prestamos;
-use App\Models\Clientes;
+use App\Models\Cliente;
 
 class LoanController extends Controller
 {
@@ -24,13 +24,12 @@ class LoanController extends Controller
     }
 
     public function listjson(){
-        $Query = $_POST['query'];
-        $State = $Query['state'];
+        $State = $_POST['state'];
         $Prestamos = Prestamos::all()->where('estado', $State);
         $Loan = [];
         foreach ($Prestamos as $Prestamo) {
             $Libro = Libros::find($Prestamo->libroId);
-            $Cliente = Clientes::find($Prestamo->clienteId);
+            $Cliente = Cliente::find($Prestamo->clienteId);
             $Model = [
                 "id" => $Prestamo->id,
                 "book" => $Libro->nombreDelLibro,

@@ -2,6 +2,7 @@
 @section('title', 'Prestamos')
 
 @section('content')
+<link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
     <!--begin::Content-->
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Subheader-->
@@ -74,7 +75,7 @@
                                         <div class="col-md-4 my-2 my-md-0">
                                             <div class="d-flex align-items-center">
                                                 <label class="mr-3 mb-0 d-none d-md-block">Estado:</label>
-                                                <select class="form-control select2" id="kt_datatable_search_status" onchange="reload()">
+                                                <select class="form-control select2" id="kt_datatable_search_status">
                                                     <option value="activo">Activo</option>
                                                     <option value="inactivo">Inactivo</option>
                                                 </select>
@@ -87,7 +88,20 @@
                         <!--end::Search Form-->
                         <!--end: Search Form-->
                         <!--begin: Datatable-->
-                        <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
+                        <table class="table datatable datatable-bordered datatable-head-custom" id="kt_datatable">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Libro</th>
+                                    <th>Cliente</th>
+                                    <th>Fecha del Prestamo</th>
+                                    <th>Fecha de devolucion</th>
+                                    <th>Devuelto</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                        </table>
                         <!--end: Datatable-->
                     </div>
                 </div>
@@ -101,7 +115,7 @@
 @endsection
 
 @section('scripts')
-<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 <script>
     $(document).ready(function() {
         $('.select2').select2({
@@ -113,122 +127,86 @@
             tags: true
         });
     });
-    var Datatable = $("#kt_datatable").KTDatatable({
-        data: {
-            type: "remote",
-            source: {
-                read: {
-                    url: "{{ url('/loan/list/json') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    params: {
-                        query: {
-                            state: $("#kt_datatable_search_status").val(),
-                        }
-                    },
-                    type : 'POST',
+    var datatable = $("#kt_datatable").DataTable({
+        language: {
+            "url": "{{ asset('assets/plugins/custom/datatables/Spanish.json') }}"
+        },
+        responsive: false,
+        ajax: {
+            url: '{{url('/loan/list/json')}}',
+            type: 'POST',
+            data: {
+                "_token": "{{ csrf_token() }}", "state" : function() { return $('#kt_datatable_search_status').val() },
+            }
+        },
+        columns: [
+            { data: 'id' },
+            { data: 'book' },
+            { data: 'client' },
+            { data: 'dateLoan' },
+            { 
+                data: 'dateDevolution', 
+                render : function(data, type, full, meta) {
+                    return data == null ? 'No devuelto' : data;
                 }
             },
-            pageSize: 10,
-            serverPaging: !0,
-            serverFiltering: !0,
-            serverSorting: !0
-        },
-        language: {
-            noRecords: "No se encontraron registros",
-            processing: "Cargando..."
-        },
-        layout: {
-            scroll: !1,
-            footer: !1
-        },
-        sortable: !0,
-        pagination: !0,
-        search: {
-            input: $("#kt_datatable_search_query")
-        },
-        columns: [{
-            field: "id",
-            title: "#",
-            type: "number",
-            width: 50,
-            template: function(t) {
-                return '<span class="font-weight-bolder">' + t.id + "</span>";
-            }
-            }, {
-            field: "book",
-            title: "Libro",
-            template: function(t) {
-                return t.book;
-            }
-        }, {
-            field: "client",
-            title: "Cliente",
-            template: function(t) {
-                return t.client;
-            }
-        }, {
-            field: "dateLoan",
-            title: "Fecha de prestamo",
-            template: function(t) {
-                return t.dateLoan;
-            }
-        }, {
-            field: "dateDevolution",
-            title: "Fecha de devolucion",
-            template: function(t) {
-                if (t.dateDevolution == null) {
-                    return '<span class="label label-lg font-weight-bold label-light-danger label-inline">No devuelto</span>';
-                }else{
-                    return t.dateDevolution;
+            {
+                data: 'isReturned',
+                render: function(data, type, full, meta) {
+                    return data == 1 ? 'Si' : 'No';
+                    console.log(full);
+                }
+            },
+            {
+                data: 'status',
+                render: function(data, type, full, meta) {
+                    return data === 'activo' ? '<span class="badge badge-success">'+data+'</span>' : '<span class="badge badge-danger">'+data+'</span>';
+                }
+            },
+            {
+                data: 'Actions',
+                render: function(data, type, full, meta) {
+                    return '\
+                    <a href="#" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">\
+                        <i class="fas fa-edit"></i>\
+                    </a>\
+                    <a href="#" class="btn btn-sm btn-clean btn-icon" title="Delete">\
+                        <i class="fas fa-trash"></i>\
+                    </a>\
+                    ';
                 }
             }
-        },
-        {
-            field: "isReturned",
-            title: "Fue devuelto",
-            template: function(t) {
-                if (t.isReturned == 1) {
-                return '<span class="label label-lg font-weight-bold label-light-success label-inline">Si</span>';
-                } else {
-                return '<span class="label label-lg font-weight-bold label-light-danger label-inline">No</span>';
-                }
-            }
-        }, {
-            field: "status",
-            title: "Estado",
-            template: function(t) {
-                if (t.status == 'activo') {
-                    return '<span class="label label-lg font-weight-bold label-light-success label-inline">' + t.status + "</span>";
-                } else {
-                    return '<span class="label label-lg font-weight-bold label-light-danger label-inline">' + t.status + "</span>";
-                }
-            }
-        }, {
-            field: "Actions",
-            title: "Acciones",
-            sortable: !1,
-            width: 125,
-            overflow: "visible",
-            autoHide: !1,
-            template: function(t) {
-                var response = '<a href="#" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">';
-                response += '<i class="fas fa-edit"></i>';
-                response += '</a>';
-                response += '<a href="#" class="btn btn-sm btn-clean btn-icon" title="Delete">';
-                response += '<i class="fas fa-trash"></i>';
-                response += '</a>';
-                return response;
-            }
-        }]
+        ],
     });
 
-    function reload(){
-        Datatable.setDataSourceParam('query', {
-            state: $("#kt_datatable_search_status").val(),
+    $('#kt_datatable_search_query').on( 'keyup', function () {
+        datatable.search( this.value ).draw();
+    } );
+
+    $("#kt_datatable_search_status").on( "change", function() {
+        LoadSearch();
+    } );
+
+    function LoadSearch() {
+        Swal.fire({
+            title: '¡Por favor espere!',
+            html: 'Buscando según filtros...',
+            allowOutsideClick: false,
+            onBeforeOpen: () => {
+                Swal.showLoading();
+            },
         });
-        Datatable.load();
+
+        var reloadTablePromise = new Promise(function(resolve, reject) {
+            datatable.ajax.reload(null, false);
+            resolve(); 
+        });
+
+        reloadTablePromise.then(function () {
+            setTimeout(function () {
+                Swal.close(); 
+            }, 300);
+        });
     }
 </script>
 @endsection
