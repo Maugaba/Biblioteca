@@ -116,6 +116,19 @@
 		<script src="assets/js/scripts.bundle.js"></script>
 		<!--end::Global Theme Bundle-->
 
+		<script>
+		$(document).ready(function() {
+			var currentUrl = window.location.href;
+			$('.menu-nav .menu-item').each(function() {
+				var menuLink = $(this).find('.menu-link').attr('href');
+				if (currentUrl.indexOf(menuLink) !== -1) {
+					$(this).addClass('menu-item-here');
+				} else {
+					$(this).removeClass('menu-item-here');
+				}
+			});
+		});
+		</script>
         @yield('scripts')
 	</body>
 	<!--end::Body-->
