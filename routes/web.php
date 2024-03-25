@@ -13,7 +13,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'client'], function () {
         Route::get('/', 'App\Http\Controllers\ClientController@index')->name('clients');
-        Route::get('/clients/all', 'App\Http\Controllers\ClientController@getAll')->name('clients.getAll');
+        Route::post('/clients/all', 'App\Http\Controllers\ClientController@getAll')->name('clients.getAll');
         Route::get('/create', 'App\Http\Controllers\ClientController@create')->name('clients.create');
         Route::post('/store', 'App\Http\Controllers\ClientController@store')->name('clients.store');
         Route::get('/edit/{id}', 'App\Http\Controllers\ClientController@edit')->name('clients.edit');
@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', 'App\Http\Controllers\UserController@index')->name('users');
-        Route::get('/all', 'App\Http\Controllers\UserController@getAll')->name('users.getAll');
+        Route::post('/all', 'App\Http\Controllers\UserController@getAll')->name('users.getAll');
         Route::get('/changepassword/{id}', 'App\Http\Controllers\UserController@changepassword')->name('users.changepassword');
         Route::get('/change/{id}', 'App\Http\Controllers\UserController@change')->name('users.change');
     });
