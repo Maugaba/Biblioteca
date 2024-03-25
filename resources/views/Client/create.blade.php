@@ -183,7 +183,7 @@
                                             <!--begin::Input-->
                                             <div class="form-group">
                                                 <label>Nombre del cliente</label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="bookName" placeholder="Ingresar nombre del libro" />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="bookName" placeholder="Ingresar nombre del cliente" />
                                                 <span class="form-text text-muted">ingrese el nombre del cliente.</span>
                                             </div>
                                             <!--end::Input-->
@@ -228,4 +228,9 @@
         <!--end::Entry-->
     </div>
     <!--end::Content-->
+@endsection
+
+@section('scripts')
+<script src="{{asset('assets/js/pages/custom/wizard/wizard-1.js')}}"></script>
+
 @endsection

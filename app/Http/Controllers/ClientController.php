@@ -48,7 +48,7 @@ class ClientController extends Controller
     
     public function create()
     {
-        return view('clients.create');
+        return view('Client.create');
     }
 
     public function store(Request $request)
@@ -60,7 +60,7 @@ class ClientController extends Controller
     {
         //logica para obtener y mostrar el formulario de edición de un cliente específico
         $cliente = Cliente::find($id);
-        return view('clients.edit', compact('cliente'));
+        return view('Client.edit', compact('cliente'));
     }
 
     public function update(Request $request, $id)
