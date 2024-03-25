@@ -151,9 +151,9 @@
             data: 'Actions',
             render: function(data, type, full, meta) {
                 return '\
-                <a href="client/edit/{id}" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar prestamo">\
-                    <i class="fas fa-edit"></i>\
-                </a>\
+                <a href="{{url('/client/edit/')}}/'+full.id+'" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar Cliente">\
+                        <i class="fas fa-edit"></i>\
+                    </a>\
                 <a href="#" class="btn btn-sm btn-clean btn-icon" title="Cambiar estado del prestamo">\
                     <i class="fas fa-trash"></i>\
                 </a>\

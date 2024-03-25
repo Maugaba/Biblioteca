@@ -1,5 +1,5 @@
 @extends('Base/base')
-@section('title', 'Creacion de clientes')
+@section('title', 'Editar Cliente')
 
 @section('content')
     <link href="{{ asset('assets/css/pages/wizard/wizard-1.css') }}" rel="stylesheet" type="text/css" />
@@ -179,12 +179,12 @@
                                     <form class="form" id="kt_form">
                                         <!--begin::Wizard Step 1-->
                                         <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-                                            <h3 class="mb-10 font-weight-bold text-dark">Crea un cliente</h3>
+                                            <h3 class="mb-10 font-weight-bold text-dark">Crea un Cliente</h3>
                                             <!--begin::Input-->
                                             <div class="form-group">
-                                                <label>Nombre del cliente</label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="bookName" placeholder="Ingresar nombre del cliente" />
-                                                <span class="form-text text-muted">ingrese el nombre del cliente.</span>
+                                                <label>Nombre del Cliente</label>
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="clientsName" id="clientsName" value="{{ $ClientData['name']}}" placeholder="Ingresar nombre del cliente" />
+                                                <span class="form-text text-muted">Por favor ingrese el nombre del Cliente.</span>
                                             </div>
                                             <!--end::Input-->
                                         </div>
@@ -193,10 +193,8 @@
                                         <div class="pb-5" data-wizard-type="step-content">
                                             <!--begin::Section-->
                                             <h4 class="mb-10 font-weight-bold text-dark">Revision de detalles y guardado</h4>
-                                            <h6 class="font-weight-bolder mb-3">Nombre del cliente:</h6>
-                                            <div class="text-dark-50 line-height-lg">
-                                                <div>Vacio</div>
-                                            </div>
+                                            <h6 class="font-weight-bolder mb-3">Nombre del Cliente:</h6>
+                                            <span id="clientn"></span>
                                             <div class="separator separator-dashed my-5"></div>
                                             <!--end::Section-->
                                         </div>
@@ -207,8 +205,8 @@
                                                 <button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-prev">Anterior</button>
                                             </div>
                                             <div>
-                                                <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-submit">Guardar</button>
-                                                <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next">Siguiente</button>
+                                                <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" onclick="UpdateData()" >Guardar</button>
+                                                <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" onclick="ShowData()" data-wizard-type="action-next" >Siguiente</button>
                                             </div>
                                         </div>
                                         <!--end::Wizard Actions-->
@@ -228,4 +226,74 @@
         <!--end::Entry-->
     </div>
     <!--end::Content-->
+@endsection
+
+@section('scripts')
+<script src="{{asset('assets/js/pages/custom/wizard/wizard-1.js')}}"></script>
+<script>
+    function UpdateData(){
+        var clientsname = $('#clientsName').val();
+
+        if(clientsname == '' || clientsname == null){
+            swal.fire({
+                title: 'Error',
+                text: 'Por favor llene todos los campos',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+            return;
+        }
+
+        swal.fire({
+            title: '¿Estás seguro de realizar el prestamo?',
+            text: "Una vez realizado, no podrá ser revertido!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, realizar!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{{url('/client/update')}}/{{$ClientData['id']}}",
+                    type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: {
+                        clientsName: clientsname,
+                    },
+                    success: function(response){
+                        swal.fire({
+                            title: 'Éxito',
+                            text: "cliente editado con éxito!",
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "{{url('/client')}}";
+                            }
+                        });
+                    },
+                    error: function(error){
+                        swal.fire({
+                            title: 'Error',
+                            text: 'Error al editar un cliente',
+                            icon: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    function ShowData() {
+        var clientsName = $('#clientsName').val();
+
+        var clienttextn = document.getElementById('clientn');
+
+        clienttextn.innerHTML = clientsName;
+    }
+
+</script>
 @endsection
