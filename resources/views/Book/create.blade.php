@@ -183,19 +183,19 @@
                                             <!--begin::Input-->
                                             <div class="form-group">
                                                 <label>Nombre del Libro</label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="bookName" placeholder="Ingresar nombre del libro" />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="booksName" id="booksName" placeholder="Ingresar nombre del libro" />
                                                 <span class="form-text text-muted">Por favor ingrese el nombre del libro.</span>
                                             </div>
                                             <!--end::Input-->
                                             <!--begin::Input-->
                                             <div class="form-group">
                                                 <label>Autor/Editorial</label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="authorOrEditorial" placeholder="Ingrese el autor o editorial"  />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="booksEditor" id="booksEditor" placeholder="Ingrese el autor o editorial"  />
                                                 <span class="form-text text-muted">Por favor ingrese el autor o editorial.</span>
                                             </div>
                                             <div class="form-group">
                                                 <label>Cantidad</label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="quantity" placeholder="Ingrese la cantidad de libros"  />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="booksQuantity" id="booksQuantity" placeholder="Ingrese la cantidad de libros"  />
                                                 <span class="form-text text-muted">Por favor ingrese la cantidad de libros.</span>
                                             </div>
                                             <!--end::Input-->
@@ -206,23 +206,17 @@
                                             <!--begin::Section-->
                                             <h4 class="mb-10 font-weight-bold text-dark">Revision de detalles y guardado</h4>
                                             <h6 class="font-weight-bolder mb-3">Nombre del libro:</h6>
-                                            <div class="text-dark-50 line-height-lg">
-                                                <div>Vacio</div>
-                                            </div>
+                                            <span id="bookn"></span>
                                             <div class="separator separator-dashed my-5"></div>
                                             <!--end::Section-->
                                             <!--begin::Section-->
                                             <h6 class="font-weight-bolder mb-3">Autor o Editor:</h6>
-                                            <div class="text-dark-50 line-height-lg">
-                                                <div>Vacio</div>
-                                            </div>
+                                            <span id="booke"></span>
                                             <div class="separator separator-dashed my-5"></div>
                                             <!--end::Section-->
                                             <!--begin::Section-->
                                             <h6 class="font-weight-bolder mb-3">Cantidad:</h6>
-                                            <div class="text-dark-50 line-height-lg">
-                                                <div>Vacio</div>
-                                            </div>
+                                            <span id="bookq"></span>
                                             <div class="separator separator-dashed my-5"></div>
                                             <!--end::Section-->
                                         </div>
@@ -233,8 +227,8 @@
                                                 <button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-prev">Anterior</button>
                                             </div>
                                             <div>
-                                                <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-submit">Guardar</button>
-                                                <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next">Siguiente</button>
+                                                <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" onclick="StoreData()" >Guardar</button>
+                                                <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" onclick="ShowData()" data-wizard-type="action-next" >Siguiente</button>
                                             </div>
                                         </div>
                                         <!--end::Wizard Actions-->
@@ -258,5 +252,96 @@
 
 @section('scripts')
 <script src="{{asset('assets/js/pages/custom/wizard/wizard-1.js')}}"></script>
+<script>
+    function StoreData(){
+        var booksname = $('#booksName').val();
+        var bookseditor = $('#booksEditor').val();
+        var booksquantity = $('#booksQuantity').val();
+        if(booksname == '' || booksname == null){
+            swal.fire({
+                title: 'Error',
+                text: 'Por favor llene todos los campos',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+            return;
+        }
+        if(bookseditor == '' || bookseditor == null){
+            swal.fire({
+                title: 'Error',
+                text: 'Por favor llene todos los campos',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+            return;
+        }
+        if(booksquantity == '' || booksquantity == null){
+            swal.fire({
+                title: 'Error',
+                text: 'Por favor llene todos los campos',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+            return;
+        }
+        swal.fire({
+            title: '¿Estás seguro de realizar el prestamo?',
+            text: "Una vez realizado, no podrá ser revertido!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, realizar!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{{url('/book/store')}}",
+                    type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: {
+                        booksName: booksname,
+                        booksEditor: bookseditor,
+                        booksQuantity: booksquantity
+                    },
+                    success: function(response){
+                        swal.fire({
+                            title: 'Éxito',
+                            text: "Libro creado con éxito!",
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "{{url('/book')}}";
+                            }
+                        });
+                    },
+                    error: function(error){
+                        swal.fire({
+                            title: 'Error',
+                            text: 'Error al crear el libro',
+                            icon: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                });
+            }
+        });
+    }
 
+    function ShowData() {
+        var booksName = $('#booksName').val();
+        var booksEditor = $('#booksEditor').val();
+        var booksQuantity = $('#booksQuantity').val();
+
+        var booktextn = document.getElementById('bookn');
+        var booktexte = document.getElementById('booke');
+        var booktextq = document.getElementById('bookq');
+
+        booktextn.innerHTML = booksName;
+        booktexte.innerHTML = booksEditor;
+        booktextq.innerHTML = booksQuantity;
+    }
+
+</script>
 @endsection

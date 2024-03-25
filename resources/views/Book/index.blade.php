@@ -262,7 +262,6 @@
 						<div class="card-header flex-wrap border-0 pt-6 pb-0">
 							<h3 class="card-title align-items-start flex-column">
 								<span class="card-label font-weight-bolder text-dark">Libros</span>
-								<span class="text-muted mt-1 font-weight-bold font-size-sm">Manage over 10,200 books</span>
 							</h3>
 							<div class="card-toolbar">
 									<a href="{{ url('/book/create') }}" class="btn btn-success font-weight-bolder">Nuevo Libro</a>
@@ -371,7 +370,7 @@
                 data: 'Actions',
                 render: function(data, type, full, meta) {
                     return '\
-                    <a href="#" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar libro">\
+                    <a href="{{url('/book/edit/')}}/'+full.id+'" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar libro">\
                         <i class="fas fa-edit"></i>\
                     </a>\
                     <a href="#" class="btn btn-sm btn-clean btn-icon" title="Desactivar libro">\

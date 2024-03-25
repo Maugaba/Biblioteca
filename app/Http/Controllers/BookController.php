@@ -16,11 +16,6 @@ class BookController extends Controller
         return view('Book.create');
     }
 
-    public function edit($id)
-    {
-        return view('Book.edit');
-    }
-
     public function listjson(){
         $State = $_POST['state'];
         $Libros = Libros::all()->where('estado', $State);
@@ -47,5 +42,39 @@ class BookController extends Controller
             "data" => $Book
         ];
         return response()->json($data);
+    }
+
+    public function store(){
+        $Data = $_POST;
+        try{
+            $Book = new Libros();
+            $Book->nombreDelLibro = $Data['booksName'];
+            $Book->autoresOEditorial = $Data['booksEditor'];
+            $Book->cantidad = $Data['booksQuantity'];
+            $Book->save();
+            return response()->json(['success' => 'Book saved successfully']);
+        }catch (\Exception $e) {
+            return response()->json(['error' => 'Error saving book']);
+        }
+    }
+
+    public function edit($id){
+        $Book = Libros::find($id);
+        return view('Book.edit', compact('Book'));
+    }
+    
+
+    public function update($id){
+        $Data = $_POST;
+        try{
+            $Book = Libros::find($id);
+            $Book->nombreDelLibro = $Data['booksName'];
+            $Book->autoresOEditorial = $Data['booksEditor'];
+            $Book->cantidad = $Data['booksQuantity'];
+            $Book->save();
+            return response()->json(['success' => 'Libro Actualizado correctamente']);
+        }catch (\Exception $e) {
+            return response()->json(['error' => 'Error al actualizar el libro']);
+        }
     }
 }
