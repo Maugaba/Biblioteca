@@ -166,7 +166,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>Nueva Contraseña</label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="password" id="password" placeholder="Ingresar nombre del Contraseña" />
+                                            <input type="password" class="form-control form-control-solid form-control-lg" name="passwords" id="passwords" placeholder="Ingresar nombre del Contraseña" />
                                             <span class="form-text text-muted">Ingrese el Contraseña.</span>
                                         </div>
                                         <!--end::Input-->
@@ -226,10 +226,10 @@ $(document).ready(function() {
 });
 
 function StoreData() {
-    var password = $('#password').val();
+    var passwords = $('#passwords').val();
     var confirmpassword = $('#confirmpassword').val();
 
-    if (password == '' || confirmpassword == '') {
+    if (passwords == '' || confirmpassword == '') {
         swal.fire({
             title: 'Error',
             text: 'Por favor llene todos los campos',
@@ -239,7 +239,7 @@ function StoreData() {
         return;
     }
 
-    if (password !== confirmpassword) {
+    if (passwords !== confirmpassword) {
         swal.fire({
             title: 'Error',
             text: 'Las contraseñas no coinciden',
@@ -256,7 +256,7 @@ function StoreData() {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
         },
         data: {
-             password: password
+             password: passwords
         },
         success: function(response) {
             swal.fire({

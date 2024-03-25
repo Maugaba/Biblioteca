@@ -71,26 +71,16 @@ class UserController extends Controller
     }
     
     public function update(Request $request, $id) {
-        // Validar la solicitud
-        $request->validate([
-            'password' => 'required|string|min:6', // Asegúrate de validar los datos correctamente
-        ]);
-    
         try {
-            // Buscar al usuario por su ID
-            $user = Usuarios::findOrFail($id);
+            $usuario = Usuarios::findOrFail($id);        
+            $password = $request->input('data.password');   
+            $usuario->password = bcrypt($password);
+            $usuario->save();
     
-            // Actualizar la contraseña del usuario con la nueva contraseña encriptada
-            $user->password = Hash::make($request->input('password'));
-    
-            // Guardar los cambios en la base de datos
-            $user->save();
-    
-            // Devolver una respuesta de éxito
             return response()->json(['success' => 'Contraseña actualizada correctamente']);
         } catch (\Exception $e) {
-            // En caso de error, devolver una respuesta de error
             return response()->json(['error' => 'Error al actualizar la contraseña']);
         }
     }
+    
 }
