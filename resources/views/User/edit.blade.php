@@ -251,7 +251,7 @@ function StoreData() {
 
     $.ajax({
         url: "{{ url('/user/update') }}" + "/" + userId,
-        type: "PUT",
+        type: "POST",
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
         },

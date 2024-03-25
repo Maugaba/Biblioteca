@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'App\Http\Controllers\UserController@index')->name('users');
         Route::post('/all', 'App\Http\Controllers\UserController@getAll')->name('users.getAll');
         Route::get('/changepassword/{id}', 'App\Http\Controllers\UserController@changepassword')->name('users.changepassword');
-        Route::put('/update/{id}', 'App\Http\Controllers\UserController@update')->name('users.update');
+        Route::post('/update/{id}', 'App\Http\Controllers\UserController@update')->name('users.update');
         Route::get('/change/{id}', 'App\Http\Controllers\UserController@change')->name('users.change'); 
         Route::get('/crear', 'App\Http\Controllers\UserController@create')->name('users.create');
     });

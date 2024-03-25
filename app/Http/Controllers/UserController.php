@@ -71,9 +71,10 @@ class UserController extends Controller
     }
     
     public function update(Request $request, $id) {
+        $data =$_POST;
         try {
             $usuario = Usuarios::findOrFail($id);        
-            $password = $request->input('data.password');   
+            $password = $data['password'];
             $usuario->password = bcrypt($password);
             $usuario->save();
     
