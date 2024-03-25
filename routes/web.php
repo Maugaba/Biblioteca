@@ -42,15 +42,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'App\Http\Controllers\LoanController@index')->name('loans');
         Route::get('/create', 'App\Http\Controllers\LoanController@create')->name('loans.create');
         Route::post('/store', 'App\Http\Controllers\LoanController@store')->name('loans.store');
-        Route::get('/edit/{id}', 'App\Http\Controllers\LoanController@edit')->name('loans.edit');
-        Route::post('/update/{id}', 'App\Http\Controllers\LoanController@update')->name('loans.update');
-        Route::get('/change/{id}', 'App\Http\Controllers\LoanController@change')->name('loans.change');
+        Route::get('/change', 'App\Http\Controllers\LoanController@change')->name('loans.change');
         Route::post('/list/json', 'App\Http\Controllers\LoanController@listjson')->name('loanslistjson');
     });
 });
-
-
-
-
 
 
