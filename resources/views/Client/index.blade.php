@@ -24,7 +24,7 @@
                             <!--end::Item-->
                             <!--begin::Item-->
                             <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
-                            <a href="{{ url('/loan') }}" class="text-white text-hover-white opacity-75 hover-opacity-100">Clientes</a>
+                            <a href="{{ url('/client') }}" class="text-white text-hover-white opacity-75 hover-opacity-100">Clientes</a>
                             <!--end::Item-->
                         </div>
                         <!--end::Breadcrumb-->
@@ -53,7 +53,7 @@
                             </div>
                             <!--end::Dropdown-->
                             <!--begin::Button-->
-                            <a href="{{url('/loan/create')}}" class="btn btn-primary font-weight-bolder"><i class="fas fa-book-reader"></i>Nuevo Cliente</a>
+                            <a href="{{url('/client/create')}}" class="btn btn-primary font-weight-bolder"><i class="fas fa-book-reader"></i>Crear Nuevo Cliente</a>
                             <!--end::Button-->
                         </div>
                     </div>
