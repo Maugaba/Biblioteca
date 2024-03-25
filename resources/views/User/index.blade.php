@@ -1,375 +1,195 @@
 @extends('Base/base')
-@section('title', 'Inicio')
+@section('title', 'Usuarios')
 
 @section('content')
+<link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
     <!--begin::Content-->
-        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						<!--begin::Subheader-->
-						<div class="subheader py-2 py-lg-12 subheader-transparent" id="kt_subheader">
-							<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-								<!--begin::Info-->
-								<div class="d-flex align-items-center flex-wrap mr-1">
-									<!--begin::Heading-->
-									<div class="d-flex flex-column">
-										<!--begin::Title-->
-										<h2 class="text-white font-weight-bold my-2 mr-5">Usuarios</h2>
-										<!--end::Title-->
-										<!--begin::Breadcrumb-->
-										<div class="d-flex align-items-center font-weight-bold my-2">
-											<!--begin::Item-->
-											<a href="#" class="opacity-75 hover-opacity-100">
-												<i class="flaticon2-shelter text-white icon-1x"></i>
-											</a>
-											<!--end::Item-->
-											<!--begin::Item-->
-											<span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
-											<a href="" class="text-white text-hover-white opacity-75 hover-opacity-100">Usuarios</a>
-											<!--end::Item-->
-										</div>
-										<!--end::Breadcrumb-->
-									</div>
-									<!--end::Heading-->
-								</div>
-								<!--end::Info-->
-								<!--begin::Toolbar-->
-								<div class="d-flex align-items-center">
-									<!--begin::Button-->
-									<a href="#" class="btn btn-transparent-white font-weight-bold py-3 px-6 mr-2">Reportes</a>
-									<!--end::Button-->
-								</div>
-								<!--end::Toolbar-->
-							</div>
-						</div>
-						<!--end::Subheader-->
-						<!--begin::Entry-->
-						<div class="d-flex flex-column-fluid">
-							<!--begin::Container-->
-							<div class="container">
-								<!--begin::Card-->
-								<div class="card card-custom">
-									<!--begin::Header-->
-									<div class="card-header flex-wrap border-0 pt-6 pb-0">
-										<div class="card-title">
-											<h3 class="card-label">Lista de usuarios
-										</div>
-										<div class="card-toolbar">
-											<!--begin::Dropdown-->
-											<div class="dropdown dropdown-inline mr-2">
-												<button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-												<span class="svg-icon svg-icon-md">
-													<!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
-													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-														<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-															<rect x="0" y="0" width="24" height="24" />
-															<path d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z" fill="#000000" opacity="0.3" />
-															<path d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z" fill="#000000" />
-														</g>
-													</svg>
-													<!--end::Svg Icon-->
-												</span>Exportar</button>
-												<!--begin::Dropdown Menu-->
-												<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-													<!--begin::Navigation-->
-													<ul class="navi flex-column navi-hover py-2">
-														<li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Choose an option:</li>
-														<li class="navi-item">
-															<a href="#" class="navi-link">
-																<span class="navi-icon">
-																	<i class="la la-print"></i>
-																</span>
-																<span class="navi-text">Print</span>
-															</a>
-														</li>
-														<li class="navi-item">
-															<a href="#" class="navi-link">
-																<span class="navi-icon">
-																	<i class="la la-copy"></i>
-																</span>
-																<span class="navi-text">Copy</span>
-															</a>
-														</li>
-														<li class="navi-item">
-															<a href="#" class="navi-link">
-																<span class="navi-icon">
-																	<i class="la la-file-excel-o"></i>
-																</span>
-																<span class="navi-text">Excel</span>
-															</a>
-														</li>
-														<li class="navi-item">
-															<a href="#" class="navi-link">
-																<span class="navi-icon">
-																	<i class="la la-file-text-o"></i>
-																</span>
-																<span class="navi-text">CSV</span>
-															</a>
-														</li>
-														<li class="navi-item">
-															<a href="#" class="navi-link">
-																<span class="navi-icon">
-																	<i class="la la-file-pdf-o"></i>
-																</span>
-																<span class="navi-text">PDF</span>
-															</a>
-														</li>
-													</ul>
-													<!--end::Navigation-->
-												</div>
-												<!--end::Dropdown Menu-->
-											</div>
-											<!--end::Dropdown-->
-											<!--begin::Button-->
-											<a href="#" class="btn btn-primary font-weight-bolder">
-											<span class="svg-icon svg-icon-md">
-												<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-														<rect x="0" y="0" width="24" height="24" />
-														<circle fill="#000000" cx="9" cy="15" r="6" />
-														<path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#000000" opacity="0.3" />
-													</g>
-												</svg>
-												<!--end::Svg Icon-->
-											</span>Nuevo Usuario</a>
-											<!--end::Button-->
-										</div>
-									</div>
-									<!--end::Header-->
-									<div class="card-body">
-										<!--begin: Search Form-->
-										<!--begin::Search Form-->
-										<div class="mb-7">
-											<div class="row align-items-center">
-												<div class="col-lg-9 col-xl-8">
-													<div class="row align-items-center">
-														<div class="col-md-4 my-2 my-md-0">
-															<div class="input-icon">
-																<input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query" />
-																<span>
-																	<i class="flaticon2-search-1 text-muted"></i>
-																</span>
-															</div>
-														</div>
-														<div class="col-md-4 my-2 my-md-0">
-															<div class="d-flex align-items-center">
-																<label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-																<select class="form-control" id="kt_datatable_search_status">
-																	<option value="">All</option>
-																	<option value="1">Pending</option>
-																	<option value="2">Delivered</option>
-																	<option value="3">Canceled</option>
-																	<option value="4">Success</option>
-																	<option value="5">Info</option>
-																	<option value="6">Danger</option>
-																</select>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-													<a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
-												</div>
-											</div>
-										</div>
-										<!--end::Search Form-->
-										<!--end: Search Form-->
-										<div class="row py-5">
-											<div class="col-lg-2">
-												<div class="input-group">
-													<div class="input-group-prepend">
-														<span class="input-group-text">ID:</span>
-													</div>
-													<input type="text" class="form-control" id="kt_datatable_check_input" value="1" />
-													<div class="input-group-append">
-														<button class="btn btn-secondary font-weight-bold" type="button" id="kt_datatable_check">Select row</button>
-													</div>
-												</div>
-											</div>
-											<div class="col-lg-10">
-												<button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_reload">Reload</button>
-												<button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_check_all">Select all rows</button>
-												<button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_uncheck_all">Unselect all rows</button>
-												<button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_hide_column">Hide Date</button>
-												<button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_show_column">Show Date</button>
-												<button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_remove_row">Remove active row</button>
-												<button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_sort_asc">Sort Status [asc]</button>
-												<button class="btn btn-light font-weight-bold" type="button" id="kt_datatable_sort_desc">Sort Status [desc]</button>
-											</div>
-										</div>
-										<!--begin: Datatable-->
-										<div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
-										<!--end: Datatable-->
-									</div>
-								</div>
-								<!--end::Card-->
-							</div>
-							<!--end::Container-->
-						</div>
-						<!--end::Entry-->
-					</div>
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Subheader-->
+        <div class="subheader py-2 py-lg-12 subheader-transparent" id="kt_subheader">
+            <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                <!--begin::Info-->
+                <div class="d-flex align-items-center flex-wrap mr-1">
+                    <!--begin::Heading-->
+                    <div class="d-flex flex-column">
+                        <!--begin::Title-->
+                        <h2 class="text-white font-weight-bold my-2 mr-5">Usuarios</h2>
+                        <!--end::Title-->
+                        <!--begin::Breadcrumb-->
+                        <div class="d-flex align-items-center font-weight-bold my-2">
+                            <!--begin::Item-->
+                            <a href="{{ url('/dashboard') }}" class="opacity-75 hover-opacity-100">
+                                <i class="flaticon2-shelter text-white icon-1x"></i>
+                            </a>
+                            <!--end::Item-->
+                            <!--begin::Item-->
+                            <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+                            <a href="{{ url('/user') }}" class="text-white text-hover-white opacity-75 hover-opacity-100">Usuarios</a>
+                            <!--end::Item-->
+                        </div>
+                        <!--end::Breadcrumb-->
+                    </div>
+                    <!--end::Heading-->
+                </div>
+                <!--end::Info-->
+            </div>
+        </div>
+        <!--end::Subheader-->
+        <!--begin::Entry-->
+        <div class="d-flex flex-column-fluid">
+            <!--begin::Container-->
+            <div class="container">
+                <!--begin::Card-->
+                <div class="card card-custom">
+                    <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                        <div class="card-title">
+                            <h3 class="card-label">Listado de usuarios</h3>
+                        </div>
+                        <div class="card-toolbar">
+                            <!--begin::Dropdown-->
+                            <div class="mr-2">
+                                <button type="button" class="btn btn-light-primary font-weight-bolder" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-excel"></i>Importar Excel</button>
+                            </div>
+                            <!--end::Dropdown-->
+                            <!--begin::Button-->
+                            <a href="{{url('/user/create')}}" class="btn btn-primary font-weight-bolder"><i class="fas fa-user-plus"></i>Nuevo Usuario</a>
+                            <!--end::Button-->
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!--begin: Search Form-->
+                        <div class="mb-7">
+                            <div class="row align-items-center">
+                                <div class="col-lg-9 col-xl-8">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 my-2 my-md-0">
+                                            <div class="input-icon">
+                                                <input type="text" class="form-control" placeholder="Buscar..." id="kt_datatable_search_query" />
+                                                <span>
+                                                    <i class="flaticon2-search-1 text-muted"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 my-2 my-md-0">
+                                            <div class="d-flex align-items-center">
+                                                <label class="mr-3 mb-0 d-none d-md-block">Estado:</label>
+                                                <select class="form-control select2" id="kt_datatable_search_status">
+                                                    <option value="activo">Activo</option>
+                                                    <option value="inactivo">Inactivo</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end: Search Form-->
+                        <!--begin: Datatable-->
+                        <table class="table datatable datatable-bordered datatable-head-custom" id="kt_datatable">
+                            <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre de Usuario</th>
+                                        <th>Estado</th>
+                                        <th>Fecha de Creación</th>
+                                        <th>Fecha de Actualización</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                            </thead>
+                        </table>
+                        <!--end: Datatable-->
+                    </div>
+                </div>
+                <!--end::Card-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::Entry-->
+    </div>
     <!--end::Content-->
-
 @endsection
 
 @section('scripts')
+<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 <script>
-    "use strict";
-// Class definition
-
-var KTDefaultDatatableDemo = function() {
-	// Private functions
-
-	// basic demo
-	var demo = function() {
-
-		var options = {
-			// datasource definition
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        url: "{{ route('users.getAll') }}",
-						method: 'GET' // Ruta de tu controlador que devuelve los datos de los usuarios
-                    },
-                },
-                pageSize: 20, // display 20 records per page
-                serverPaging: true,
-                serverFiltering: true,
-                serverSorting: true,
+    $(document).ready(function() {
+        $('.select2').select2({
+            language: {
+                noResults: function() {
+                    return "No hay resultados encontrados";
+                }
             },
-
-			// layout definition
-			layout: {
-                scroll: true, // enable/disable datatable scroll both horizontal and vertical when needed.
-                height: 550, // datatable's body's fixed height
-                footer: false, // display/hide footer
-            },
-
-            // column sorting
-            sortable: true,
-
-            pagination: true,
-
-            search: {
-                input: $('#kt_datatable_search_query'),
-                key: 'generalSearch'
-            },
-
-            // columns definition
-            columns: [
-                {
-                    field: 'ID',
-                    title: '#',
-                    sortable: false,
-                    type: 'number',
-                    width: 30,
-                    selector: true,
-                    textAlign: 'center',
-                    template: function(row) {
-                        return row.RecordID;
-                    },
-                },
-                // Aquí debes definir las columnas con los nombres de los campos de tu base de datos
-                // Por ejemplo:
-                { field: 'id', title: 'ID' },
-                { field: 'username', title: 'Nombre de Usuario' },
-                { field: 'estado', title: 'Estado' },
-                { field: 'created_at', title: 'Creacion' },
-                { field: 'updated_at', title: 'Actualizado' }
-            ],
-
-        };
-
-		var datatable = $('#kt_datatable').KTDatatable(options);
-
-		// both methods are supported
-		// datatable.methodName(args); or $(datatable).KTDatatable(methodName, args);
-
-		$('#kt_datatable_destroy').on('click', function() {
-			// datatable.destroy();
-			$('#kt_datatable').KTDatatable('destroy');
-		});
-
-		$('#kt_datatable_init').on('click', function() {
-			datatable = $('#kt_datatable').KTDatatable(options);
-		});
-
-		$('#kt_datatable_reload').on('click', function() {
-			// datatable.reload();
-			$('#kt_datatable').KTDatatable('reload');
-		});
-
-		$('#kt_datatable_sort_asc').on('click', function() {
-			datatable.sort('Status', 'asc');
-		});
-
-		$('#kt_datatable_sort_desc').on('click', function() {
-			datatable.sort('Status', 'desc');
-		});
-
-		// get checked record and get value by column name
-		$('#kt_datatable_get').on('click', function() {
-			// select active rows
-			datatable.rows('.datatable-row-active');
-			// check selected nodes
-			if (datatable.nodes().length > 0) {
-				// get column by field name and get the column nodes
-				var value = datatable.columns('CompanyName').nodes().text();
-				console.log(value);
-			}
-		});
-
-		// record selection
-		$('#kt_datatable_check').on('click', function() {
-			var input = $('#kt_datatable_check_input').val();
-			datatable.setActive(input);
-		});
-
-		$('#kt_datatable_check_all').on('click', function() {
-			// datatable.setActiveAll(true);
-			$('#kt_datatable').KTDatatable('setActiveAll', true);
-		});
-
-		$('#kt_datatable_uncheck_all').on('click', function() {
-			// datatable.setActiveAll(false);
-			$('#kt_datatable').KTDatatable('setActiveAll', false);
-		});
-
-		$('#kt_datatable_hide_column').on('click', function() {
-			datatable.columns('ShipDate').visible(false);
-		});
-
-		$('#kt_datatable_show_column').on('click', function() {
-			datatable.columns('ShipDate').visible(true);
-		});
-
-		$('#kt_datatable_remove_row').on('click', function() {
-			datatable.rows('.datatable-row-active').remove();
-		});
-
-		$('#kt_datatable_search_status').on('change', function() {
-			datatable.search($(this).val().toLowerCase(), 'Status');
-		});
-
-		$('#kt_datatable_search_type').on('change', function() {
-			datatable.search($(this).val().toLowerCase(), 'Type');
-		});
-
-		$('#kt_datatable_search_status, #kt_datatable_search_type').selectpicker();
-
-	};
-
-	return {
-		// public functions
-		init: function() {
-			demo();
-		},
-	};
-}();
-
-jQuery(document).ready(function() {
-	KTDefaultDatatableDemo.init();
+        });
+    });
+    var datatable = $("#kt_datatable").DataTable({
+    language: {
+        "url": "{{ asset('assets/plugins/custom/datatables/Spanish.json') }}"
+    },
+    responsive: false,
+		ajax: {
+		url: '{{ url('/user/all') }}',
+		type: 'POST', 
+        data: {
+            "_token": "{{ csrf_token() }}",
+            "state": function() { return $('#kt_datatable_search_status').val() },
+        }
+	},
+    columns: [
+        { data: 'id' },
+        { data: 'username' },
+        { data: 'estado',
+            render: function(data, type, full, meta) {
+                return data === 'activo' ? '<span class="badge badge-success">'+data+'</span>' : '<span class="badge badge-danger">'+data+'</span>';
+            }
+        },
+        { data: 'created_at' },
+        { data: 'updated_at' },
+        {
+            data: 'actions',
+            render: function(data, type, full, meta) {
+                return '\
+                <a href="{{url('/user/edit')}}/'+full.id+'" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar usuario">\
+                    <i class="fas fa-edit"></i>\
+                </a>\
+                <a href="{{url('/user/changepassword')}}/'+full.id+'" class="btn btn-sm btn-clean btn-icon" title="Cambiar contraseña">\
+                    <i class="fas fa-key"></i>\
+                </a>\
+                ';
+            }
+        }
+    ],
 });
 
+
+    $('#kt_datatable_search_query').on( 'keyup', function () {
+        datatable.search( this.value ).draw();
+    } );
+
+    $("#kt_datatable_search_status").on( "change", function() {
+        LoadSearch();
+    } );
+
+    function LoadSearch() {
+        Swal.fire({
+            title: '¡Por favor espere!',
+            html: 'Buscando según filtros...',
+            allowOutsideClick: false,
+            onBeforeOpen: () => {
+                Swal.showLoading();
+            },
+        });
+
+        var reloadTablePromise = new Promise
+		(function(resolve, reject) {
+            datatable.ajax.reload(null, false);
+            resolve(); 
+        });
+
+        reloadTablePromise.then(function () {
+            setTimeout(function () {
+                Swal.close(); 
+            }, 300);
+        });
+    }
 </script>
 @endsection

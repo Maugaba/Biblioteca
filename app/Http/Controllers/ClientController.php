@@ -5,6 +5,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 
+
 class ClientController extends Controller
 {
     public function index(Request $request)
@@ -13,9 +14,36 @@ class ClientController extends Controller
     }
 
 
-    public function getAll() {
-        $clientes = Cliente::all();
-        return $clientes;
+    public function getAll(Request $request) {
+        $state = $request->input('state');
+        $clientes = Cliente::where('estado', $state)->get();
+        $data = [];
+    
+        foreach ($clientes as $cliente) {
+            $model = [
+                "id" => $cliente->id,
+                "nombreCompleto" => $cliente->nombreCompleto,
+                "estado" => $cliente->estado,
+                "created_at" => $cliente->created_at,
+                "updated_at" => $cliente->updated_at,
+                "actions" => ""
+            ];
+            array_push($data, $model);
+        }
+    
+        $meta = [
+            "page" => 1,
+            "pages" => 1,
+            "perpage" => 5,
+            "total" => count($data)
+        ];
+    
+        $response = [
+            "meta" => $meta,
+            "data" => $data
+        ];
+    
+        return response()->json($response);
     }
     
     public function create()

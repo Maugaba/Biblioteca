@@ -12,9 +12,36 @@ class UserController extends Controller
     }
 
     
-    public function getAll() {
-        $clientes = Usuarios::all();
-        return $clientes;
+    public function getAll(Request $request) {
+        $state = $request->input('state');
+        $users = Usuarios::where('estado', $state)->get(); 
+        $data = [];
+    
+        foreach ($users as $user) {
+            $model = [
+                "id" => $user->id,
+                "username" => $user->username,
+                "estado" => $user->estado,
+                "created_at" => $user->created_at,
+                "updated_at" => $user->updated_at,
+                "actions" => ""
+            ];
+            array_push($data, $model);
+        }
+    
+        $meta = [
+            "page" => 1,
+            "pages" => 1,
+            "perpage" => 5,
+            "total" => count($data)
+        ];
+    
+        $response = [
+            "meta" => $meta,
+            "data" => $data
+        ];
+    
+        return response()->json($response);
     }
     
 }
