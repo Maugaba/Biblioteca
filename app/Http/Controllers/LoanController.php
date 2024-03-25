@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Models\Libros;
 use App\Models\Prestamos;
 use App\Models\Cliente;
+use Illuminate\Support\Facades\Date;
+use DB;
 
 class LoanController extends Controller
 {
@@ -37,11 +39,6 @@ class LoanController extends Controller
         return view('Loan.create', compact('BooksArray', 'ClientsArray'));
     }
 
-    public function edit($id)
-    {
-        return view('Loan.edit');
-    }
-
     public function listjson(){
         $State = $_POST['state'];
         $Prestamos = Prestamos::all()->where('estado', $State);
@@ -49,9 +46,19 @@ class LoanController extends Controller
         foreach ($Prestamos as $Prestamo) {
             $Libro = Libros::find($Prestamo->libroId);
             $Cliente = Cliente::find($Prestamo->clienteId);
+            $Books = explode(", ", $Prestamo->libroId);
+            $BooksName = [];
+            foreach ($Books as $book) {
+                $Libro = Libros::find($book);
+                $Model = [
+                    "name" => $Libro->nombreDelLibro,
+                ];
+                array_push($BooksName, $Model);
+            }
+
             $Model = [
                 "id" => $Prestamo->id,
-                "book" => $Libro->nombreDelLibro,
+                "book" => $BooksName,
                 "client" => $Cliente->nombreCompleto,
                 "dateLoan" => $Prestamo->fechaDePrestamo,
                 "dateDevolution" => $Prestamo->fechaDeDevolucion,
@@ -72,5 +79,60 @@ class LoanController extends Controller
             "data" => $Loan
         ];
         return response()->json($data);
+    }
+
+    public function store(){
+        $Data = $_POST;
+        DB::beginTransaction();
+        try {
+            foreach ($Data['books'] as $book) {
+                $Libro = Libros::find($book);
+                if ($Libro->cantidad == 1) {
+                    $Libro->estado = 'ocupado';
+                    $Libro->cantidad = $Libro->cantidad - 1;
+                    $Libro->save();
+                }
+                else{
+                    $Libro->cantidad = $Libro->cantidad - 1;
+                    $Libro->save();
+                }
+            }
+            $bookList = implode(", ", $Data['books']);
+            $Prestamo = new Prestamos();
+            $Prestamo->libroId = $bookList;
+            $Prestamo->clienteId = $Data['client'];
+            $Prestamo->fechaDePrestamo = Date('Y-m-d');
+            $Prestamo->save();
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Prestamo creado correctamente']);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(['status' => 'error', 'message' => 'Error al crear el prestamo']);
+        }
+    }
+
+    public function change(){
+        $Id = $_POST['id'];
+        DB::beginTransaction();
+        try {
+            $Prestamo = Prestamos::find($Id);
+            $Prestamo->devuelto = 1;
+            $Prestamo->estado = 'inactivo';
+            $Prestamo->fechaDeDevolucion = Date('Y-m-d');
+            $Prestamo->save();
+            $Books = explode(", ", $Prestamo->libroId);
+            foreach ($Books as $book) {
+                $Libro = Libros::find($book);
+                $Libro->cantidad = $Libro->cantidad + 1;
+                $Libro->estado = 'disponible';
+                $Libro->save();
+            }
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Prestamo devuelto correctamente']);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(['status' => 'error', 'message' => 'Error al devolver el prestamo']);
+        }
+        
     }
 }

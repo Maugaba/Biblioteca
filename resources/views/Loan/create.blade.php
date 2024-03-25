@@ -1,5 +1,5 @@
 @extends('Base/base')
-@section('title', 'Prestamos')
+@section('title', 'Crear Prestamo')
 
 @section('content')
     <link href="{{ asset('assets/css/pages/wizard/wizard-1.css') }}" rel="stylesheet" type="text/css" />
@@ -162,7 +162,7 @@
                                                 <h6 class="font-weight-bolder mb-3">Detalles del préstamo:</h6>
                                                 <div class="text-dark-50 line-height-lg">
                                                     <div>Libros: <span id="book"></span></div>
-                                                    <div>Cliente: <span id="client"></span></div>
+                                                    <div>Cliente: <span id="clienttext"></span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -174,7 +174,7 @@
                                             </div>
                                             <div>
                                                 <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" onclick="StoreData()">Guardar</button>
-                                                <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next">Siguiente</button>
+                                                <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" onclick="ShowData()" data-wizard-type="action-next">Siguiente</button>
                                             </div>
                                         </div>
                                         <!--end::Wizard Actions-->
@@ -249,6 +249,9 @@
                 $.ajax({
                     url: "{{url('/loan/store')}}",
                     type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
                     data: {
                         books: books,
                         client: client
@@ -277,6 +280,25 @@
                 });
             }
         });
+    }
+
+    function ShowData()
+    {
+        var books = $('#books').val();
+        var client = $('#client').val();
+        
+        var booktext = document.getElementById('book');
+        var clienttext = document.getElementById('clienttext');
+        booktext.innerHTML = "";
+        clienttext.innerHTML = "";
+        clienttext.innerHTML = $('#client option:selected').text();
+        for (var i = 0; i < books.length; i++) {
+            if(i == books.length - 1)
+                booktext.innerHTML += $('#books option[value="'+books[i]+'"]').text();
+            else{
+                booktext.innerHTML += $('#books option[value="'+books[i]+'"]').text() + ', ';
+            }
+        }
     }
 </script>
 @endsection

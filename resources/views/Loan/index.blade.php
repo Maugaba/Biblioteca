@@ -92,7 +92,7 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Libro</th>
+                                    <th>Libros</th>
                                     <th>Cliente</th>
                                     <th>Fecha del Prestamo</th>
                                     <th>Fecha de devolucion</th>
@@ -140,7 +140,18 @@
         },
         columns: [
             { data: 'id' },
-            { data: 'book' },
+            { 
+                data: 'book', 
+                render: function(data, type, full, meta) {
+                    var books = '<ul>';
+                    for (let i = 0; i < data.length; i++) {
+                        books += '<li>'+data[i].name+'</li>';
+                    }
+                    books += '</ul>';
+                    return books;
+                    
+                }
+            },
             { data: 'client' },
             { data: 'dateLoan' },
             { 
@@ -165,14 +176,17 @@
             {
                 data: 'Actions',
                 render: function(data, type, full, meta) {
-                    return '\
-                    <a href="#" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar prestamo">\
-                        <i class="fas fa-edit"></i>\
-                    </a>\
-                    <a href="#" class="btn btn-sm btn-clean btn-icon" title="Cambiar estado del prestamo">\
-                        <i class="fas fa-trash"></i>\
-                    </a>\
-                    ';
+                    if (full.status == 'inactivo') {
+                        return "Sin acciones";
+                    }
+                    else
+                    {
+                        return '\
+                        <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Cambiar estado del prestamo" onclick = "ChangeState('+full.id+')">\
+                            <i class="fas fa-trash"></i>\
+                        </a>\
+                        ';
+                    }
                 }
             }
         ],
@@ -205,6 +219,55 @@
             setTimeout(function () {
                 Swal.close(); 
             }, 300);
+        });
+    }
+
+    function ChangeState(id){
+        console.log('ChangeState');
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, cambiar estado!',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '{{url('/loan/change')}}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: {
+                        "id": id
+                    },
+                    success: function(response) {
+                        if (response.status) {
+                            Swal.fire(
+                                '¡Cambiado!',
+                                'El estado del prestamo ha sido cambiado.',
+                                'success'
+                            );
+                            datatable.ajax.reload();
+                        } else {
+                            Swal.fire(
+                                '¡Error!',
+                                'Ha ocurrido un error al cambiar el estado del prestamo.',
+                                'error'
+                            );
+                        }
+                    },
+                    error: function() {
+                        Swal.fire(
+                            '¡Error!',
+                            'Ha ocurrido un error al cambiar el estado del prestamo.',
+                            'error'
+                        );
+                    }
+                });
+            }
         });
     }
 </script>
