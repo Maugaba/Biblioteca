@@ -35,9 +35,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'App\Http\Controllers\UserController@index')->name('users');
         Route::post('/all', 'App\Http\Controllers\UserController@getAll')->name('users.getAll');
         Route::get('/changepassword/{id}', 'App\Http\Controllers\UserController@changepassword')->name('users.changepassword');
-        Route::get('/change/{id}', 'App\Http\Controllers\UserController@change')->name('users.change');
+        Route::put('/update/{id}', 'App\Http\Controllers\UserController@update')->name('users.update');
+        Route::get('/change/{id}', 'App\Http\Controllers\UserController@change')->name('users.change'); 
+        Route::get('/crear', 'App\Http\Controllers\UserController@create')->name('users.create');
     });
-
+    
+    
     Route::group(['prefix' => 'loan'], function () {
         Route::get('/', 'App\Http\Controllers\LoanController@index')->name('loans');
         Route::get('/create', 'App\Http\Controllers\LoanController@create')->name('loans.create');

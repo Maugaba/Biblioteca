@@ -52,7 +52,7 @@
                             </div>
                             <!--end::Dropdown-->
                             <!--begin::Button-->
-                            <a href="{{url('/user/create')}}" class="btn btn-primary font-weight-bolder"><i class="fas fa-user-plus"></i>Nuevo Usuario</a>
+                            <a href="{{url('/user/crear')}}" class="btn btn-primary font-weight-bolder"><i class="fas fa-user-plus"></i>Nuevo Usuario</a>
                             <!--end::Button-->
                         </div>
                     </div>
@@ -148,12 +148,12 @@
             data: 'actions',
             render: function(data, type, full, meta) {
                 return '\
-                <a href="{{url('/user/edit')}}/'+full.id+'" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar usuario">\
-                    <i class="fas fa-edit"></i>\
-                </a>\
                 <a href="{{url('/user/changepassword')}}/'+full.id+'" class="btn btn-sm btn-clean btn-icon" title="Cambiar contraseña">\
                     <i class="fas fa-key"></i>\
                 </a>\
+                <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Cambiar estado del prestamo" onclick = "ChangeState('+full.id+')">\
+                            <i class="fas fa-trash"></i>\
+                        </a>\
                 ';
             }
         }
@@ -191,5 +191,51 @@
             }, 300);
         });
     }
+
+    function ChangeState(id) {
+    console.log('ChangeState');
+    Swal.fire({
+        title: 'Quieres cambiar estado?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, cambiar estado!',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '{{url('/user/change')}}/' + id,
+                type: 'GET', 
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                success: function (response) {
+                    if (response.status) {
+                        Swal.fire(
+                            '¡Cambiado!',
+                            'El estado del usuario ha sido cambiado.',
+                            'success'
+                        );
+                        datatable.ajax.reload();
+                    } else {
+                        Swal.fire(
+                            '¡Error!',
+                            'Ha ocurrido un error al cambiar el estado del usuario.',
+                            'error'
+                        );
+                    }
+                },
+                error: function () {
+                    Swal.fire(
+                        '¡Error!',
+                        'Ha ocurrido un error al cambiar el estado del prestamo.',
+                        'error'
+                    );
+                }
+            });
+        }
+    });
+}
+
 </script>
 @endsection
