@@ -202,7 +202,6 @@
                     </div>
 						<!--end::Body-->
 					</div>
-					
 					<!--end::Card-->
 				</div>
 				<!--end::Content-->
@@ -259,7 +258,7 @@
                     <a href="{{url('/book/edit/')}}/'+full.id+'" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar libro">\
                         <i class="fas fa-edit"></i>\
                     </a>\
-                    <a href="#" class="btn btn-sm btn-clean btn-icon" title="Desactivar libro">\
+					<a href="#" class="btn btn-sm btn-clean btn-icon" title="Cambiar estado" onclick = "changeStatus('+full.id+')">\
                         <i class="fas fa-trash"></i>\
                     </a>\
                     ';
@@ -297,5 +296,56 @@
             }, 300);
         });
     }
+
+	function changeStatus(id) 
+	{
+		Swal.fire({
+			title: '¿Estás seguro?',
+			text: '¿Quieres cambiar el estado de este libro?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Sí, cambiar estado'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					url: '{{url('/book/change')}}',
+                    type: 'POST',
+					headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+					data: {
+                        "id": id
+					},
+					success: function(response) {
+						if (response.success) {
+							Swal.fire(
+								'¡Cambiado!',
+								'El estado del libro ha sido cambiado correctamente.',
+								'success'
+							).then(function() {
+								datatable.ajax.reload();
+							});
+						} else {
+							Swal.fire(
+								'Error',
+								'Hubo un error al cambiar el estado del libro.',
+								'error'
+							);
+						}
+					},
+					error: function(xhr, status, error) {
+						Swal.fire(
+							'Error',
+							'Hubo un error al cambiar el estado del libro.',
+							'error'
+						);
+					}
+				});
+			}
+		});
+	}
+
 </script>
 @endsection

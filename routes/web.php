@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', 'App\Http\Controllers\BookController@store')->name('books.store');
         Route::get('/edit/{id}', 'App\Http\Controllers\BookController@edit')->name('books.edit');
         Route::post('/update/{id}', 'App\Http\Controllers\BookController@update')->name('books.update');
-        Route::get('/change/{id}', 'App\Http\Controllers\BookController@change')->name('books.change');
+        Route::post('/change', 'App\Http\Controllers\BookController@change')->name('books.change');
         Route::post('/list/json', 'App\Http\Controllers\BookController@listjson')->name('bookslistjson');
     });
 

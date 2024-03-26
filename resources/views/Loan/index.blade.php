@@ -223,7 +223,6 @@
     }
 
     function ChangeState(id){
-        console.log('ChangeState');
         Swal.fire({
             title: '¿Estás seguro?',
             text: "¡No podrás revertir esto!",
