@@ -2612,7 +2612,7 @@ var KTWidgets = function () {
         var options = {
             series: [{
                 name: 'Net Profit',
-                data: [35, 65, 75, 55, 45, 60, 55]
+                data: [95, 65, 75, 55, 45, 60, 55]
             }, {
                 name: 'Revenue',
                 data: [40, 70, 80, 60, 50, 65, 60]
@@ -2742,7 +2742,7 @@ var KTWidgets = function () {
         var options = {
             series: [{
                 name: 'Net Profit',
-                data: [35, 65, 75, 55, 45, 60, 55]
+                data: [105, 65, 75, 55, 45, 60, 55]
             }, {
                 name: 'Revenue',
                 data: [40, 70, 80, 60, 50, 65, 60]

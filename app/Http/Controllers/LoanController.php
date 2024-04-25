@@ -135,4 +135,28 @@ class LoanController extends Controller
         }
         
     }
+
+    public function getChartData()
+    {
+        $loanData = [];
+        $months = [
+            'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+        ];
+    
+        for ($i = 0; $i < 12; $i++) {
+            $month = date("m", mktime(0, 0, 0, $i + 1, 1, date("Y")));
+    
+            $loans = Prestamos::whereYear('fechaDePrestamo', date("Y"))
+                ->whereMonth('fechaDePrestamo', $month)
+                ->count();
+    
+            $loanData[] = $loans;
+        }
+    
+        return response()->json([
+            'loanData' => $loanData,
+            'months' => $months
+        ]);
+    }
+
 }

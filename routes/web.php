@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', 'App\Http\Controllers\LoanController@store')->name('loans.store');
         Route::get('/change', 'App\Http\Controllers\LoanController@change')->name('loans.change');
         Route::post('/list/json', 'App\Http\Controllers\LoanController@listjson')->name('loanslistjson');
+        Route::get('/loans/chart-data', 'App\Http\Controllers\LoanController@getChartData')->name('loans.getChartData');
     });
 });
 
