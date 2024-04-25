@@ -205,7 +205,7 @@
         if (result.isConfirmed) {
             $.ajax({
                 url: '{{url('/user/change')}}/' + id,
-                type: 'GET', 
+                type: 'POST', 
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },

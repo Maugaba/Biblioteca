@@ -77,4 +77,24 @@ class BookController extends Controller
             return response()->json(['error' => 'Error al actualizar el libro']);
         }
     }
+
+    public function change(){
+        $Id = $_POST['id'];
+        try{
+            $Book = Libros::find($Id);
+            
+            if($Book->estado == 'disponible'){
+                $Book->estado = 'ocupado';
+            } elseif($Book->estado == 'ocupado'){
+                $Book->estado = 'disponible';
+            }
+            
+            $Book->save();
+            
+            return response()->json(['success' => 'Estado del libro cambiado correctamente']);
+        }catch (\Exception $e) {
+            return response()->json(['error' => 'Error al cambiar el estado del libro']);
+        }
+    }
+    
 }
