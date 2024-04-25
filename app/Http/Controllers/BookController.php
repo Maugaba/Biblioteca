@@ -8,7 +8,8 @@ class BookController extends Controller
 {
     public function index()
     {
-        return view('Book.index');
+        $ultimosLibrosPrestados = Libros::where('estado', 'ocupado')->latest()->take(5)->get();
+        return view('Book.index', compact('ultimosLibrosPrestados'));
     }
 
     public function create()
@@ -96,5 +97,6 @@ class BookController extends Controller
             return response()->json(['error' => 'Error al cambiar el estado del libro']);
         }
     }
+   
     
 }

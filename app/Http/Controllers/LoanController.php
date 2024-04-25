@@ -103,6 +103,12 @@ class LoanController extends Controller
             $Prestamo->clienteId = $Data['client'];
             $Prestamo->fechaDePrestamo = Date('Y-m-d');
             $Prestamo->save();
+
+            foreach ($Data['books'] as $book) {
+                $Libro = Libros::find($book);
+                $Libro->estado = 'ocupado';
+                $Libro->save();
+            }
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Prestamo creado correctamente']);
         } catch (\Throwable $th) {
