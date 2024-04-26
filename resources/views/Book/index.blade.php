@@ -71,11 +71,6 @@
 									<!--begin::Text-->
 									<span class="text-muted font-weight-bold font-size-sm pb-4">{{ $libro->autoresOEditorial }}</span>
 									<!--end::Text-->
-									<!--begin::Action-->
-									<div>
-										<button type="button" class="btn btn-light font-weight-bolder font-size-sm py-2">Book Now</button>
-									</div>
-									<!--end::Action-->
 								</div>
 								<!--end::Info-->
 							</div>
@@ -97,6 +92,11 @@
 								<span class="card-label font-weight-bolder text-dark">Libros</span>
 							</h3>
 							<div class="card-toolbar">
+									<!--begin::Dropdown-->
+									<div class="mr-2">
+										<button id="btnImportExcel" type="button" class="btn btn-light-primary font-weight-bolder" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-excel"></i>Importar Excel</button>
+									</div>									
+									<!--end::Dropdown-->
 									<a href="{{ url('/book/create') }}" class="btn btn-success font-weight-bolder">Nuevo Libro</a>
 							</div>
 						</div>
@@ -293,6 +293,70 @@
 			}
 		});
 	}
+	document.getElementById('btnImportExcel').addEventListener('click', function() {
+		// Crear un input de tipo file en memoria
+		var input = document.createElement('input');
+		input.type = 'file';
+		input.accept = '.csv, .xlsx'; // Aceptar solo archivos CSV y Excel
+		input.style.display = 'none'; // Ocultar el input
+
+		// Cuando se selecciona un archivo, desencadenar el clic del input de archivo
+		input.onchange = function(event) {
+			var file = event.target.files[0];
+			if (file) {
+
+				var formData = new FormData();
+				formData.append('excel_file', file);
+
+				Swal.fire({
+					title: 'Cargando...',
+					text: 'Por favor, espera mientras se importan los libros.',
+					allowOutsideClick: false,
+					onBeforeOpen: () => {
+						Swal.showLoading();
+					}
+				});
+				$.ajax({
+					url: '{{url('/excel/import')}}',
+					type: 'POST',
+					headers: {
+						'X-CSRF-TOKEN': '{{ csrf_token() }}'
+					},
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(response) {
+						if (response.success) {
+							Swal.fire(
+								'¡Importado!',
+								'Los libros han sido importados correctamente.',
+								'success'
+							).then(function() {
+								datatable.ajax.reload();
+							});
+						} else {
+							Swal.fire(
+								'Error',
+								'Hubo un error al importar los libros.',
+								'error'
+							);
+						}
+					},
+					error: function(xhr, status, error) {
+						Swal.fire(
+							'Error',
+							'Hubo un error al importar los libros.',
+							'error'
+						);
+					}
+				});
+			}
+		};
+
+		// Hacer clic en el input de archivo
+		input.click();
+	});
 
 </script>
 @endsection

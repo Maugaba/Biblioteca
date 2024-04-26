@@ -15,8 +15,8 @@ class Libros extends Migration
     {
         Schema::create('libros', function (Blueprint $table) {
             $table->id();
-            $table->string('nombreDelLibro', 60)->nullable(false);  
-            $table->string('autoresOEditorial', 60)->nullable(false);    
+            $table->string('nombreDelLibro', 200)->nullable(false);  
+            $table->string('autoresOEditorial', 200)->nullable(false);    
             $table->integer('cantidad')->default(1);
             $table->enum('estado', ['disponible', 'ocupado'])->default('disponible');
             $table->timestamps();

@@ -46,12 +46,6 @@
                             <h3 class="card-label">Listado de clientes</h3>
                         </div>
                         <div class="card-toolbar">
-                            <!--begin::Dropdown-->
-                            <div class="mr-2">
-                                
-                                <button type="button" class="btn btn-light-primary font-weight-bolder" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-excel"></i>Importar Excel</button>
-                            </div>
-                            <!--end::Dropdown-->
                             <!--begin::Button-->
                             <a href="{{url('/client/create')}}" class="btn btn-primary font-weight-bolder"><i class="fas fa-book-reader"></i>Crear Nuevo Cliente</a>
                             <!--end::Button-->

@@ -49,6 +49,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/list/json', 'App\Http\Controllers\LoanController@listjson')->name('loanslistjson');
         Route::get('/loans/chart-data', 'App\Http\Controllers\LoanController@getChartData')->name('loans.getChartData');
     });
+
+    Route::group(['prefix' => 'excel'], function () {
+        Route::post('/import', 'App\Http\Controllers\ExcelController@import')->name('excel.import');
+    });
 });
 
 
