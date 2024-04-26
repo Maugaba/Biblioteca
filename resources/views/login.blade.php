@@ -32,25 +32,25 @@
 						<!--begin::Login Header-->
 						<div class="d-flex flex-center mb-15">
 							<a href="#">
-								<img src="assets/media/logos/logo-letter-13.png" class="max-h-75px" alt="" />
+								<img src="assets/media/logos/logo-letter-13.png" class="max-h-125px" alt="" />
 							</a>
 						</div>
 						<!--end::Login Header-->
 						<!--begin::Login Sign in form-->
 						<div class="login-signin">
-							<div class="mb-20">
-								<h3 class="opacity-40 font-weight-normal">Iniciar sesion</h3>
-								<p class="opacity-40">Ingresa datos de tu cuenta:</p>
-							</div>
+						<div class="mb-20">
+							<h3 class="opacity-100 font-weight-normal" style="color: #ffffff; font-size: 32px;">Iniciar sesión</h3>
+							<p class="opacity-100" style="color: #ffffff; font-size: 24px;">Ingresa datos de tu cuenta:</p>
+						</div>
 							<form class="form" id="kt_login_signin_form">
 								<div class="form-group">
-									<input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="text" placeholder="Usuario" name="username" id="username" autocomplete="off" />
+									<input class="form-control h-auto text-black bg-blue-o-90 rounded-pill border-0 py-4 px-8" type="text" placeholder="Usuario" name="username" id="username" autocomplete="off" />
 								</div>
 								<div class="form-group">
-									<input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="password" placeholder="Contraseña" name="password" id="password" />
+									<input class="form-control h-auto text-black bg-blue-o-90 rounded-pill border-0 py-4 px-8" type="password" placeholder="Contraseña" name="password" id="password" />
 								</div>
 								<div class="form-group text-center mt-10">
-									<button type="button" onclick="login()" class="btn btn-pill btn-primary opacity-90 px-15 py-3">Ingresar</button>
+									<button type="button" onclick="login()" class="btn btn-pill btn-primary opacity-90 px-25 py-3">Ingresar</button>
 								</div>
 							</form>
 						</div>
