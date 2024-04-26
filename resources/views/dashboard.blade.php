@@ -37,60 +37,66 @@
             </div>
         </div>
         <!--end::Subheader-->
-        <!--begin::Entry-->
-        <div class="d-flex flex-column-fluid">
-            <!--begin::Container-->
+      
+            <div class="d-flex flex-column-fluid">
             <div class="container">
-                <!--begin::Dashboard-->
-                <!--begin::Row-->
-
-                <!--end::Row-->
-                <!--begin::Row-->
-                <!--end::Row-->
-                <!--begin::Row-->
-                <div class="row">
-                <div class="col-lg-6 col-xxl-4">
-                    <!--begin::Mixed Widget 4-->
-                    <div class="card card-custom  gutter-b card-stretch">
-                        <!--begin::Header-->
-                        <div class="card-header border-0 py-5">
-                            <h3 class="card-title font-weight-bolder text-black">Libros Prestados</h3>
-                            <div class="card-toolbar"></div>
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Body-->
-                        <div class="card-body d-flex flex-column p-0">
-                            <!--begin::Chart-->
-                            <div id="loanChart" style="height: 200px"></div>
-                            <!--end::Chart-->
-                            <!--begin::Stats-->
-                            <div class="card-spacer bg-white card-rounded flex-grow-1">
-                                <!--begin::Row-->
-                                <!--end::Row-->
-                            </div>
-                            <!--end::Stats-->
-                        </div>
-                        <!--end::Body-->
-                    </div>
-                    <!--end::Mixed Widget 4-->
-                </div>
-
-                    <div class="col-lg-6 col-xxl-8">
-                        <div class="card card-custom card-stretch gutter-b">
-
-                            <div class="card-body py-0">
-                                <!--begin::Table-->
-   
-                                <!--end::Table-->
+                    <!--begin::Dashboard-->
+                    <!--begin::Row-->
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-xxl-12">
+                            <div class="card card-custom gutter-b card-stretch">
+                                <!--begin::Header-->
+                                <div class="card-header border-0 py-5">
+                                    <h3 class="card-title font-weight-bolder text-black">Libros Prestados</h3>
+                                    <div class="card-toolbar"></div>
+                                </div>
+                                <!--end::Header-->
+                                <!--begin::Body-->
+                                <div class="card-body d-flex flex-column p-0">
+                                    <!--begin::Chart-->
+                                    <div id="loanChart" style="height: 200px"></div>
+                                    <!--end::Chart-->
+                                    <!--begin::Stats-->
+                                    <div class="card-spacer bg-white card-rounded flex-grow-1">
+                                        <!--begin::Row-->
+                                        <!--end::Row-->
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Body-->
                             </div>
                         </div>
                     </div>
+                    <!--end::Row-->
+                    <!--begin::Row-->
+                    <div class="row">
+                        <div class="col-lg-6 col-xxl-4">
+                            <!--begin::Mixed Widget 4-->
+                            <div class="card card-custom gutter-b card-stretch">
+                                <div class="card-body">
+                                    <img src="assets/media/bg/biblioteca.jpg" alt="Imagen de ejemplo" class="img-fluid">
+                                </div>
+                            </div>
+                            <!--end::Mixed Widget 4-->
+                        </div>
+                        <div class="col-lg-6 col-xxl-8">
+                            <div class="card card-custom gutter-b card-stretch">
+                                <div class="card-body">
+                                    <strong>Historia</strong>
+                                    <p>La Biblioteca Concepción Chiquirichapa tiene una historia que refleja la evolución de su comunidad tanto estudiantil como general. Sus raíces se remontan a agosto de 1998, cuando el entonces alcalde Pedro Leocadio Escalante Gómez, durante su mandato de 1996 a 2000, visionó la creación de este espacio para que la población estudiantil y la comunidad en general pudieran acceder de manera gratuita a la lectura y al conocimiento.</p>
+                                    <strong>Visión</strong>
+                                    <p>Ser una unidad de apoyo a la docencia y la investigación, satisfaciendo las necesidades educativas de la población estudiantil y elevando el nivel educativo de la comunidad en general.</p>
+                                    <strong>Misión</strong>
+                                    <p>Fomentar los buenos hábitos de lectura para alcanzar los objetivos de enseñanza, aprendizaje e investigación, garantizando el acceso equitativo a la información y el conocimiento en textos para fortalecer el interés por el aprendizaje en la población estudiantil.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Row-->
                 </div>
             </div>
-            <!--end::Container-->
-        </div>
-        <!--end::Entry-->
     </div>
+
     <!--end::Content-->
 @endsection
 @section('scripts')
