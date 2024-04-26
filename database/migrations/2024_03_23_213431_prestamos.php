@@ -15,7 +15,7 @@ class Prestamos extends Migration
     {
         Schema::create('prestamos', function (Blueprint $table) {
             $table->id();
-            $table->integer('libroId')->foreign('libroId')->references('id')->on('libros');
+            $table->string('libroId',55);
             $table->string('clienteId', 55)->foreign('clienteId')->references('id')->on('clientes');
             $table->date('fechaDePrestamo');
             $table->date('fechaDeDevolucion')->nullable();

@@ -46,7 +46,7 @@ class LoanController extends Controller
         foreach ($Prestamos as $Prestamo) {
             $Libro = Libros::find($Prestamo->libroId);
             $Cliente = Cliente::find($Prestamo->clienteId);
-            $Books = explode(", ", $Prestamo->libroId);
+            $Books = explode(",", $Prestamo->libroId);
             $BooksName = [];
             foreach ($Books as $book) {
                 $Libro = Libros::find($book);
@@ -97,7 +97,7 @@ class LoanController extends Controller
                     $Libro->save();
                 }
             }
-            $bookList = implode(", ", $Data['books']);
+            $bookList = implode(",", $Data['books']);
             $Prestamo = new Prestamos();
             $Prestamo->libroId = $bookList;
             $Prestamo->clienteId = $Data['client'];
@@ -163,6 +163,65 @@ class LoanController extends Controller
             'loanData' => $loanData,
             'months' => $months
         ]);
+    }
+
+    public function indexReport()
+    {
+        return view('Loan.report');
+    }
+
+    public function reportJson(){
+        $Date = $_POST['Date'];
+        if ($Date == '') {
+            $Prestamos = Prestamos::all()->where('estado', 'inactivo');
+        } else {
+            $TwoDates = explode(" / ", $Date);
+            $FechadePrestamo = explode("/", $TwoDates[0]);
+            $FechadeDevolucion = explode("/", $TwoDates[1]);
+            $FechadePrestamo = $FechadePrestamo[2] . "-" . $FechadePrestamo[0] . "-" . $FechadePrestamo[1];
+            $FechadeDevolucion = $FechadeDevolucion[2] . "-" . $FechadeDevolucion[0] . "-" . $FechadeDevolucion[1];
+            $Prestamos = Prestamos::whereBetween('fechaDePrestamo', [$FechadePrestamo, $FechadeDevolucion])
+            ->whereBetween('fechaDeDevolucion', [$FechadePrestamo, $FechadeDevolucion])
+            ->where('estado', 'inactivo')
+            ->get();
+        }
+        $Loan = [];
+        foreach ($Prestamos as $Prestamo) {
+            $Libro = Libros::find($Prestamo->libroId);
+            $Cliente = Cliente::find($Prestamo->clienteId);
+            $Books = explode(", ", $Prestamo->libroId);
+            $BooksName = [];
+            foreach ($Books as $book) {
+                $Libro = Libros::find($book);
+                $Model = [
+                    "name" => $Libro->nombreDelLibro,
+                ];
+                array_push($BooksName, $Model);
+            }
+
+            $Model = [
+                "id" => $Prestamo->id,
+                "book" => $BooksName,
+                "client" => $Cliente->nombreCompleto,
+                "dateLoan" => $Prestamo->fechaDePrestamo,
+                "dateDevolution" => $Prestamo->fechaDeDevolucion,
+                "isReturned" => $Prestamo->devuelto,
+                "status" => $Prestamo->estado,
+                "actions" => ""
+            ];
+            array_push($Loan, $Model);
+        }
+        $Meta =[
+            "page"=> 1,
+            "pages"=> 1,
+            "perpage"=> 5,
+            "total"=> count($Loan),
+            ];
+        $data = [
+            "meta" => $Meta,
+            "data" => $Loan
+        ];
+        return response()->json($data);
     }
 
 }
