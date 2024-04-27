@@ -46,9 +46,18 @@
                             <h3 class="card-label">Listado de prestamos</h3>
                         </div>
                         <div class="card-toolbar">
-                            <!--begin::Button-->
-                            <a href="{{url('/loan/create')}}" class="btn btn-primary font-weight-bolder"><i class="fas fa-book-reader"></i>Nuevo Prestamo</a>
-                            <!--end::Button-->
+                            <!-- Botón Nuevo Prestamo -->
+                            <a href="{{url('/loan/create')}}" class="btn btn-primary font-weight-bolder">
+                                <i class="fas fa-book-reader"></i> Nuevo Prestamo
+                            </a>
+
+                            <!-- Espacio entre botones -->
+                            <div style="margin-right: 10px;"></div>
+
+                            <!-- Botón Ir a reportes -->
+                            <a href="{{url('/loan/report')}}" class="btn btn-success font-weight-bolder">
+                                <i class="fas fa-chart-bar"></i> Ir a reportes
+                            </a>
                         </div>
                     </div>
                     <div class="card-body">

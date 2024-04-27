@@ -24,7 +24,7 @@
                             <!--end::Item-->
                             <!--begin::Item-->
                             <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
-                            <a href="{{url('/loan')}}" class="text-white text-hover-white opacity-75 hover-opacity-100">Listado de préstamos</a>
+                            <a href="{{url('/loan')}}" class="text-white text-hover-white opacity-75 hover-opacity-100">Prestamos</a>
                             <!--end::Item-->
                             <!--begin::Item-->
                             <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
@@ -173,6 +173,7 @@
                                                 <button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-prev">Anterior</button>
                                             </div>
                                             <div>
+                                                <button type="button" class="btn btn-light-danger font-weight-bolder text-uppercase px-9 py-4" onclick="CancelForm()">Cancelar</button>
                                                 <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" onclick="StoreData()">Guardar</button>
                                                 <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" onclick="ShowData()" data-wizard-type="action-next">Siguiente</button>
                                             </div>
@@ -299,6 +300,23 @@
                 booktext.innerHTML += $('#books option[value="'+books[i]+'"]').text() + ', ';
             }
         }
+    }
+
+        // Función para cancelar el formulario
+    function CancelForm() {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Si cancelas, perderás los datos ingresados hasta ahora.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, cancelar',
+            cancelButtonText: 'No, continuar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirigir a la página principal de préstamos
+                window.location.href = "{{ url('/loan') }}";
+            }
+        });
     }
 </script>
 @endsection

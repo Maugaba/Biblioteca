@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/change', 'App\Http\Controllers\LoanController@change')->name('loans.change');
         Route::post('/list/json', 'App\Http\Controllers\LoanController@listjson')->name('loanslistjson');
         Route::get('/loans/chart-data', 'App\Http\Controllers\LoanController@getChartData')->name('loans.getChartData');
+        
         Route::get('/report', 'App\Http\Controllers\LoanController@indexReport')->name('indexReport');
         Route::post('/report/json', 'App\Http\Controllers\LoanController@reportJson')->name('reportJson');
     });

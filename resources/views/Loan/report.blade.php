@@ -1,5 +1,5 @@
 @extends('Base/base')
-@section('title', 'Prestamos')
+@section('title', 'Reportes')
 
 @section('content')
 <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
@@ -26,6 +26,10 @@
                             <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
                             <a href="{{ url('/loan') }}" class="text-white text-hover-white opacity-75 hover-opacity-100">Prestamos</a>
                             <!--end::Item-->
+                            <!--begin::Item-->
+                            <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+                            <a href="" class="text-white text-hover-white opacity-75 hover-opacity-100">Reportes</a>
+                            <!--end::Item-->
                         </div>
                         <!--end::Breadcrumb-->
                     </div>
@@ -43,12 +47,7 @@
                 <div class="card card-custom">
                     <div class="card-header flex-wrap border-0 pt-6 pb-0">
                         <div class="card-title">
-                            <h3 class="card-label">Listado de prestamos</h3>
-                        </div>
-                        <div class="card-toolbar">
-                            <!--begin::Button-->
-                            <a href="{{url('/loan/create')}}" class="btn btn-primary font-weight-bolder"><i class="fas fa-book-reader"></i>Nuevo Prestamo</a>
-                            <!--end::Button-->
+                            <h3 class="card-label">Listado de reportes</h3>
                         </div>
                     </div>
                     <div class="card-body">
