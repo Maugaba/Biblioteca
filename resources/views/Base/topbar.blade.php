@@ -9,8 +9,13 @@
                 <span class="symbol symbol-35">
                     <span class="symbol-label text-white font-size-h5 font-weight-bold bg-white-o-30">A</span>
                 </span>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
             </div>
-        </div>
+            <a href="{{url('/logout')}}" class="btn btn-danger font-weight-bolder mr-2">Cerrar sesión</a>
+        </div>       
         <!--end::Toggle-->
     </div>
     <!--end::User-->

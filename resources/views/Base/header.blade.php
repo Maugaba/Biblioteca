@@ -37,7 +37,13 @@
                     <i class="menu-arrow"></i>
                 </a>
             </li>
+            <li class="menu-item menu-item-submenu" data-menu-toggle="click" aria-haspopup="true">
+                <a>
+                <img alt="Logo" src="{{asset('assets/media/logos/LogoBiblioteca.png')}}" class="logo-default max-h-40px" />
+                </a>
+            </li>
         </ul>
+        
         <!--end::Header Nav-->
     </div>
     <!--end::Header Menu-->

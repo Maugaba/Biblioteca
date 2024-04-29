@@ -32,7 +32,7 @@
 						<!--begin::Login Header-->
 						<div class="d-flex flex-center mb-15">
 							<a href="#">
-								<img src="assets/media/logos/logo-letter-13.png" class="max-h-125px" alt="" />
+								<img src="assets/media/logos/LogoBiblioteca.png" class="max-h-125px" alt="" />
 							</a>
 						</div>
 						<!--end::Login Header-->

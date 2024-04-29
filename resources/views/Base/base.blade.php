@@ -70,7 +70,9 @@
 								<!--begin::Header Menu Wrapper-->
                                 @include('Base.header')
 								<!--end::Header Menu Wrapper-->
+								
 							</div>
+							
 							<!--end::Left-->
 							<!--begin::Topbar-->
                             @include('Base.topbar')
@@ -86,6 +88,7 @@
                     @include('Base.footer')
 					<!--end::Footer-->
 				</div>
+				
 				<!--end::Wrapper-->
 			</div>
 			<!--end::Page-->
