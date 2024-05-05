@@ -40,7 +40,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/crear', 'App\Http\Controllers\UserController@create')->name('users.create');
     });
     
-    
     Route::group(['prefix' => 'loan'], function () {
         Route::get('/', 'App\Http\Controllers\LoanController@index')->name('loans');
         Route::get('/create', 'App\Http\Controllers\LoanController@create')->name('loans.create');

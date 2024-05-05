@@ -23,6 +23,9 @@ class ClientController extends Controller
             $model = [
                 "id" => $cliente->id,
                 "nombreCompleto" => $cliente->nombreCompleto,
+                "dpi" => $cliente->dpi,
+                "telefono" => $cliente->telefono,
+                "correo" => $cliente->correo,
                 "estado" => $cliente->estado,
                 "created_at" => $cliente->created_at,
                 "updated_at" => $cliente->updated_at,
@@ -53,39 +56,45 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-        $Data = $_POST;
-        try{
-            $Client = new Cliente();
-            $Client->nombreCompleto = $Data['clientsName'];
+        try {
+            $client = new Cliente();
+            $client->nombreCompleto = $request->input('clientsName');
+            $client->dpi = $request->input('dpi');
+            $client->telefono = $request->input('phone');
+            $client->correo = $request->input('email');
 
-            $Client->save();
+            $client->save();
             return response()->json(['success' => 'Client saved successfully']);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(['error' => 'Error saving client']);
         }
     }
 
+    public function update(Request $request, $id)
+    {
+        try {
+            $client = Cliente::find($id);
+            $client->nombreCompleto = $request->input('clientsName');
+            $client->dpi = $request->input('dpi');
+            $client->telefono = $request->input('phone');
+            $client->correo = $request->input('email');
+            $client->save();
+            return response()->json(['success' => 'Datos del cliente Actualizado correctamente']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al actualizar datos del cliente']);
+        }
+    }
+    
     public function edit($id){
         $Client = Cliente::find($id);
         $ClientData = [
             "id" => $Client->id,
-            "name" => $Client->nombreCompleto
+            "name" => $Client->nombreCompleto,
+            "dpi" => $Client->dpi,
+            "phone" => $Client->telefono,
+            "email" => $Client->correo
         ];
         return view('Client.edit', compact('ClientData'));
-
-    }
-    
-
-    public function update($id){
-        $Data = $_POST;
-        try{
-            $Client = Cliente::find($id);
-            $Client->nombreCompleto = $Data['clientsName'];
-            $Client->save();
-            return response()->json(['success' => 'Datos del cliente Actualizado correctamente']);
-        }catch (\Exception $e) {
-            return response()->json(['error' => 'Error al actualizar datos del cliente']);
-        }
     }
 
     public function change($id)

@@ -186,6 +186,21 @@
                                                 <input type="text" class="form-control form-control-solid form-control-lg" name="clientsName" id="clientsName" value="{{ $ClientData['name']}}" placeholder="Ingresar nombre del cliente" />
                                                 <span class="form-text text-muted">Por favor ingrese el nombre del Cliente.</span>
                                             </div>
+                                            <div class="form-group">
+                                                <label>DPI</label>
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="dpi" id="dpi" value="{{ $ClientData['dpi']}}" placeholder="Ingresar dpi del cliente" />
+                                                <span class="form-text text-muted">Por favor ingrese el DPI del Cliente.</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Telefono</label>
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="phone" id="phone" value="{{ $ClientData['phone']}}" placeholder="Ingresar telefono del cliente" />
+                                                <span class="form-text text-muted">Por favor ingrese el telefono del Cliente.</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Correo Electronico</label>
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="email" id="email" value="{{ $ClientData['email']}}" placeholder="Ingresar correo del cliente" />
+                                                <span class="form-text text-muted">Por favor ingrese el correo del Cliente.</span>
+                                            </div>
                                             <!--end::Input-->
                                         </div>
                                         <!--end::Wizard Step 1-->
@@ -233,6 +248,9 @@
 <script>
     function UpdateData(){
         var clientsname = $('#clientsName').val();
+        var dpi = $('#dpi').val();
+        var phone = $('#phone').val();
+        var email = $('#email').val();
 
         if(clientsname == '' || clientsname == null){
             swal.fire({
@@ -261,6 +279,9 @@
                     },
                     data: {
                         clientsName: clientsname,
+                        dpi: dpi,
+                        phone: phone,
+                        email: email
                     },
                     success: function(response){
                         swal.fire({

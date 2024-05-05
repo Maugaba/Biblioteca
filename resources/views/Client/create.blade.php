@@ -183,8 +183,23 @@
                                             <!--begin::Input-->
                                             <div class="form-group">
                                                 <label>Nombre del Cliente</label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="clientsName" id="clientsName" placeholder="Ingresar nombre del libro" />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="clientsName" id="clientsName" placeholder="Ingresar nombre del cliente" />
                                                 <span class="form-text text-muted">Por favor ingrese el nombre del Cliente.</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>DPI</label>
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="dpi" id="dpi" placeholder="Ingresar DPI del cliente" />
+                                                <span class="form-text text-muted">Por favor ingrese el DPI del Cliente.</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Teléfono</label>
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="phone" id="phone" placeholder="Ingresar teléfono del cliente" />
+                                                <span class="form-text text-muted">Por favor ingrese el teléfono del Cliente.</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Correo Electrónico</label>
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="email" id="email" placeholder="Ingresar correo del cliente" />
+                                                <span class="form-text text-muted">Por favor ingrese el correo del Cliente.</span>
                                             </div>
                                             <!--end::Input-->
                                         </div>
@@ -233,8 +248,11 @@
 <script>
     function StoreData(){
         var clientsname = $('#clientsName').val();
+        var dpi = $('#dpi').val();
+        var phone = $('#phone').val();
+        var email = $('#email').val();
 
-        if(clientsname == '' || clientsname == null){
+        if (clientsname == '' || clientsname == null || dpi == '' || dpi == null || phone == '' || phone == null || email == '' || email == null) {
             swal.fire({
                 title: 'Error',
                 text: 'Por favor llene todos los campos',
@@ -254,13 +272,16 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "{{url('/client/store')}}",
+                    url: "{{ url('/client/store') }}",
                     type: "POST",
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
                     data: {
                         clientsName: clientsname,
+                        dpi: dpi,
+                        phone: phone,
+                        email: email
                     },
                     success: function(response){
                         swal.fire({

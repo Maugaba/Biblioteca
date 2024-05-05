@@ -15,7 +15,10 @@ class Clientes extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
-            $table->string('nombreCompleto', 60)->nullable(false);
+            $table->string('nombreCompleto', 60);
+            $table->string('dpi', 20)->nullable();
+            $table->string('telefono', 15)->nullable();
+            $table->string('correo', 100)->nullable();
             $table->enum('estado', ['activo', 'inactivo'])->default('activo');
             $table->timestamps();
         });

@@ -87,6 +87,9 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Nombre Completo</th>
+                                        <th>DPI</th>
+                                        <th>Telefono</th>
+                                        <th>Correo Electronico</th>
                                         <th>Estado</th>
                                         <th>Fecha de Creación</th>
                                         <th>Fecha de Actualización</th>
@@ -134,6 +137,9 @@
     columns: [
         { data: 'id' },
         { data: 'nombreCompleto' },
+        { data: 'dpi' },
+        { data: 'telefono' },
+        { data: 'correo' },
         { data: 'estado',
             render: function(data, type, full, meta) {
                 return data === 'activo' ? '<span class="badge badge-success">'+data+'</span>' : '<span class="badge badge-danger">'+data+'</span>';
