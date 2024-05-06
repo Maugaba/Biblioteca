@@ -136,7 +136,7 @@
                         <table class="table datatable datatable-bordered datatable-head-custom" id="kt_datatable">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
+                                    <th>Codigo</th>
                                     <th>Nombre del Libro</th>
                                     <th>Autor/Editorial</th>
                                     <th>Cantidad</th>
